@@ -1,0 +1,12 @@
+.bxr-price-list{
+    background: #F8F8F8;
+}
+
+.bxr-price-list ul{
+    margin-left: 20px;
+    border: 1px solid #CCC;
+}
+
+.bxr-price-list > ul{
+    margin-left: 0px;
+}

@@ -1,0 +1,7 @@
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+if($arResult["SECTION"]["IPROPERTY_VALUES"]["SECTION_META_TITLE"]){
+	$APPLICATION->SetPageProperty("title_in", $arResult["SECTION"]["IPROPERTY_VALUES"]["SECTION_META_TITLE"]);
+}
+if($arResult["SECTION"]["IPROPERTY_VALUES"]["SECTION_META_DESCRIPTION"]){
+	$APPLICATION->SetPageProperty("description_in", $arResult["SECTION"]["IPROPERTY_VALUES"]["SECTION_META_DESCRIPTION"]);
+}

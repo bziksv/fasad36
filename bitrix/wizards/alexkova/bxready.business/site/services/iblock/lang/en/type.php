@@ -1,0 +1,11 @@
+<?
+$MESS["CONTENT_TYPE_NAME"] = "Content";
+$MESS["CONTENT_ELEMENT_NAME"] = "Elements";
+$MESS["CONTENT_SECTION_NAME"] = "Sections";
+$MESS["CATALOG_TYPE_NAME"] = "Catalog";
+$MESS["CATALOG_ELEMENT_NAME"] = "Products";
+$MESS["CATALOG_SECTION_NAME"] = "Sections";
+$MESS["SERVICES_TYPE_NAME"] = "Services";
+$MESS["SERVICES_ELEMENT_NAME"] = "Elements";
+$MESS["SERVICES_SECTION_NAME"] = "Sections";
+?>

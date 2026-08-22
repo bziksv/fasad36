@@ -1,0 +1,1 @@
+<? require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/alexkova.bxready2/install/admin/alexkova.bxready2_template_area_edit.php");?>

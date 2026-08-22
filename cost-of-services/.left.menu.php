@@ -1,0 +1,32 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"СТАНДАРТ", 
+		"/cost-of-services/standart/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"БИЗНЕС", 
+		"/cost-of-services/biznes/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"ОПТИМА", 
+		"/cost-of-services/optima/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"БРЕНД", 
+		"/cost-of-services/uteplenie-brend/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

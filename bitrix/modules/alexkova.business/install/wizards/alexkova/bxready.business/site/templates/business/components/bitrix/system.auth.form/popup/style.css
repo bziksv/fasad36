@@ -1,0 +1,21 @@
+.bx_login_block{
+    float: left;
+    /*padding-left: 16px;
+    background: url('images/gui.png') no-repeat left center;*/
+}
+a.bx_login_top_inline_link{
+	/*color: #576e75;*/
+	vertical-align: middle;
+	text-decoration: none;
+	font-size: 13px;
+	/*line-height: 13px;*/
+	margin: 0 8px 0 5px;
+}
+
+a.bx_login_top_inline_link:hover{
+    text-decoration: none;
+}
+
+.bx_login_popup_form {
+	margin: 20px 0;
+}

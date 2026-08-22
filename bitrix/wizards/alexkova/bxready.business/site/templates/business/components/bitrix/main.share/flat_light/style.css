@@ -1,0 +1,40 @@
+.bx-share-social {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	list-style: none;
+    float: right;
+}
+.bx-share-icon {
+display: block;
+    float: left;
+
+}
+
+.bx-share-icon a,
+.bx-share-icon a:link,
+.bx-share-icon a:visited,
+.bx-share-icon a:active {
+
+    display: inline-block;
+    float: left;
+    color: #EEE;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0px;
+    margin: 0px;
+	font-size: 14px;
+	text-align: center;
+	vertical-align: middle;
+	display: block;;
+	border-radius: 3px;
+    text-align: center;
+    height: 22px;
+    width: 22px;
+}
+
+.bx-share-icon a:hover{
+    border: 1px solid transparent;
+    color: #FFF;
+    margin-top: -1px;
+}

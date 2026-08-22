@@ -1,0 +1,1 @@
+<div style="font-family: 'Open Sans'; font-size: 16px; margin-bottom: 10px; color: #980f1f; font-weight: bold; font-size: 16px; user-select: none;">"Мы создаем тепло и уют... Термофасад"</div>

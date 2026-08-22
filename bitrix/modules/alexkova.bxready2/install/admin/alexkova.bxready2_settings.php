@@ -1,0 +1,1 @@
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/alexkova.bxready2/admin/alexkova.bxready2_settings.php");?>

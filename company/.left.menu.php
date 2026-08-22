@@ -1,0 +1,39 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"О компании", 
+		"/company/index.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Сертификаты", 
+		"/company/licenses/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Партнёры", 
+		"/company/partners_and_clients/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Контакты", 
+		"/company/contacts/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Технические описания материалов", 
+		"/company/tekhnicheskie-opisaniya-materialov/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

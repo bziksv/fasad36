@@ -1,0 +1,1 @@
+<img  class="bxr-logo" src="<?=SITE_DIR;?>images/bxready_business.png" alt="BXR Business">

@@ -1,0 +1,12 @@
+.success-message {
+	text-align: center;
+	font-size: 16px;
+}
+
+font.errortext{
+    color: #F00;
+}
+
+.bxr-form-body textarea{
+    resize: none;
+}

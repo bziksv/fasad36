@@ -1,0 +1,101 @@
+<RequireAll>
+    Require all granted
+
+    Require not ip 49.13.193.0/24
+    Require not ip 5.139.230.0/24
+    Require not ip 5.139.253.0/24
+    Require not ip 31.181.248.0/24
+    Require not ip 37.18.38.0/24
+    Require not ip 37.77.111.0/24
+    Require not ip 45.140.18.0/24
+    Require not ip 62.183.46.0/24
+    Require not ip 77.110.108.0/24
+    Require not ip 83.239.97.0/24
+    Require not ip 85.172.109.0/24
+    Require not ip 85.174.205.0/24
+    Require not ip 85.175.197.0/24
+    Require not ip 85.175.217.0/24
+    Require not ip 91.233.43.0/24
+    Require not ip 95.153.163.0/24
+    Require not ip 95.153.177.0/24
+    Require not ip 95.153.178.0/24
+    Require not ip 95.153.180.0/24
+    Require not ip 95.25.184.0/24
+    Require not ip 178.176.211.0/24
+    Require not ip 185.10.173.0/24
+    Require not ip 188.162.140.0/24
+    Require not ip 188.162.143.0/24
+    Require not ip 188.170.169.0/24
+    Require not ip 217.78.231.0/24
+</RequireAll>
+
+
+Options -Indexes 
+ErrorDocument 404 /404.php
+
+<IfModule mod_php5.c>
+  php_flag session.use_trans_sid off
+  #php_value display_errors 1
+  php_value mbstring.internal_encoding UTF-8
+  php_value mbstring.func_overload 2
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  RewriteEngine On
+#Без WWW
+RewriteCond %{HTTP_HOST} ^www.fasad36.ru$ [NC]
+RewriteRule ^(.*)$ http://fasad36.ru$1 [R=301,L]
+#добавить слеш
+RewriteBase /
+RewriteRule (.*)\.html$ $1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*[^/])$ $1/ [L,R=301]
+
+
+Redirect 301 /price/Prajs-farbe/ http://fasad36.ru/upload/%D0%9F%D1%80%D0%B0%D0%B9%D1%81_%D0%A2%D0%B5%D1%80%D0%BC%D0%BE%D1%84%D0%B0%D1%81%D0%B0%D0%B4_FARBE_01.04.2017.pdf
+Redirect 301 /price/Prajs-dyubeli/ http://fasad36.ru/upload/price/Price_R_СТЕКЛОСЕТКИ_ДЮБЕЛИ_ПОГОНАЖ_01.06.23.pdf
+
+Redirect 301 /price/Prajs-klei/ http://fasad36.ru/upload/price/Price_R_%D0%9A%D0%9B%D0%95%D0%98%20%D0%94%D0%9B%D0%AF%20%D0%A3%D0%A2%D0%95%D0%9F%D0%9B%D0%95%D0%9D%D0%98%D0%AF_01.06.23.pdf
+
+Redirect 301 /price/Prajs-UTEPLITELI/ http://fasad36.ru/upload/price/price-r-utepliteli_01.07.23.pdf
+Redirect 301 /price/prajs-bolars/ http://fasad36.ru/upload/price/Price_R_BOLARS_01.06.23.pdf
+Redirect 301 /catalog/shtukaturka-koroed/ /catalog/koroed/
+
+Redirect 301 /articles/Interesnoe+o+fasadah/shtukaturka-fasada-koroed/ /catalog/koroed/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-sten-snaruzhi-mineralnoy-vatoy/ /services/uteplenie-sten-mineralnoy-vatoy/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-kirpichnykh-sten/ /services/uteplenie-kirpichnykh-sten/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-gazobetonnykh-sten/ /services/uteplenie-gazobetonnykh-sten/ 
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-doma-minvatoy/ /services/uteplenie-sten-mineralnoy-vatoy/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-sten-penoplastom/ /services/ueplenie-sten-penoplastom/
+Redirect 301 /articles/Interesnoe+o+fasadah/materialy-dlya-otdelki-fasada-doma/ /catalog/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-sten-snaruzhi/ /services/uteplenie-sten/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-sten-penoplastom-i-penopolistirolom-snaruzhi-vsya-tekhnologiya/ /services/ueplenie-sten-penoplastom/
+Redirect 301 /articles/Sovety/ /articles/sovety/
+Redirect 301 /articles/Interesnoe+o+fasadah/uteplenie-sten-preimushchestva-nedostatki-osnovnye-vidy-rekomendatsii/ /articles/Interesnoe-o-fasadah/uteplenie-sten-preimushchestva-nedostatki-osnovnye-vidy-rekomendatsii/
+<IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
+  RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
+  RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
+</IfModule>
+
+<IfModule mod_dir.c>
+  DirectoryIndex index.php index.html
+</IfModule>
+
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresByType image/jpeg "access plus 3 day"
+  ExpiresByType image/gif "access plus 3 day"
+  ExpiresByType image/png "access plus 3 day"
+  ExpiresByType text/css "access plus 3 day"
+  ExpiresByType application/javascript "access plus 3 day"  
+</IfModule>

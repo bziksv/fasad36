@@ -1,0 +1,3 @@
+<?
+$sSectionName="QUICK-MIX";
+?>

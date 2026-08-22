@@ -1,0 +1,1 @@
+<div class="bxr-top-panel-line bxr-color hidden-xs"></div>
