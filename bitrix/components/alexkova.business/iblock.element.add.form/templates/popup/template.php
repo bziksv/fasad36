@@ -183,8 +183,12 @@ if (strlen($arResult["MESSAGE"]) > 0):?>
 									{
 										$value = "";
 									}
+								$phoneClass = (
+									$arResult["PROPERTY_LIST_FULL"][$propertyID]["CODE"] === "PHONE"
+									|| $arResult["PROPERTY_LIST_FULL"][$propertyID]["CODE"] === "USER_PHONE"
+								) ? ' class="bxr-phone-input"' : '';
 								?>
-								<input type="text" name="PROPERTY[<?=$propertyID?>][<?=$i?>]" size="25" value="<?=$value?>" /><br /><?
+								<input type="text"<?=$phoneClass?> name="PROPERTY[<?=$propertyID?>][<?=$i?>]" size="25" value="<?=$value?>" /><br /><?
 								if($arResult["PROPERTY_LIST_FULL"][$propertyID]["USER_TYPE"] == "DateTime"):?><?
 									$APPLICATION->IncludeComponent(
 										'bitrix:main.calendar',
@@ -270,8 +274,10 @@ if (strlen($arResult["MESSAGE"]) > 0):?>
 											}
 
 											?>
-							<input type="checkbox" name="PROPERTY[<?=$propertyID?>]<?=$type == "checkbox" ? "[".$key."]" : ""?>" value="<?=$key?>" id="property_<?=$key?>"<?=$checked ? " checked=\"checked\"" : ""?> />
-							<span data-text_script='Нажимая на эту кнопку, я даю свое <a href="/company/legal/personal-data-consent/">согласие</a> на обработку персональных данных в соответствии с <a href="/company/legal/personal-data-processing/">политикой обработки персональных данных</a>.*'></span><br />
+							<label for="property_<?=$key?>" class="bxr-form-consent">
+								<input type="checkbox" name="PROPERTY[<?=$propertyID?>]<?=$type == "checkbox" ? "[".$key."]" : ""?>" value="<?=$key?>" id="property_<?=$key?>"<?=$checked ? " checked=\"checked\"" : ""?> />
+								Я даю <a href="/company/legal/personal-data-consent/">согласие</a> на обработку персональных данных в соответствии с <a href="/company/legal/personal-data-processing/">политикой обработки персональных данных</a>.
+							</label><br />
 											<?
 										}
 									break;
@@ -324,7 +330,7 @@ if (strlen($arResult["MESSAGE"]) > 0):?>
 						<input type="hidden" name="captcha_sid" value="<?=$arResult["CAPTCHA_CODE"]?>" />
 						<img src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" />
 				<br/>
-					<span data-text_script="<?=GetMessage("IBLOCK_FORM_CAPTCHA_PROMPT")?>"></span><span class="starrequired">*</span>:
+					<?=GetMessage("IBLOCK_FORM_CAPTCHA_PROMPT")?><span class="starrequired">*</span>:
 					<input type="text" name="captcha_word" maxlength="50" value="">
 				<br /><br />
 			<?endif?>
@@ -353,11 +359,10 @@ if (strlen($arResult["MESSAGE"]) > 0):?>
 	</div>
 </form>
 <script>
-	 var phone = $('#iblockForm23_5').find('input[name="PROPERTY[117][0]"]');
-	 phone.mask('+7(999) 999 99 99');
-	 
-	$('span[data-text_script]').each(function(i, el){
-		var span = $(el);
-		span.html(span.data('text_script'));
-	});
+	(function () {
+		var form = $('#iblockForm<?=$arParams["IBLOCK_ID"]?>_<?=$BXR_FORM_COUNTER?>');
+		if (form.length && $.fn.mask) {
+			form.find('.bxr-phone-input').mask('+7(999) 999 99 99');
+		}
+	})();
 </script>

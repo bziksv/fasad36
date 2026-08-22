@@ -588,7 +588,18 @@ if ($bAllowAccess)
 
 			if ($bError)
 			{
-				$arResult["ERRORS"][] = str_replace("#PROPERTY_NAME#", intval($propertyID) > 0 ? $arResult["PROPERTY_LIST_FULL"][$propertyID]["NAME"] : (!empty($arParams["CUSTOM_TITLE_".$propertyID]) ? $arParams["CUSTOM_TITLE_".$propertyID] : GetMessage("IBLOCK_FIELD_".$propertyID)), GetMessage("IBLOCK_ADD_ERROR_REQUIRED"));
+				if (
+					intval($propertyID) > 0
+					&& isset($arResult["PROPERTY_LIST_FULL"][$propertyID]["CODE"])
+					&& $arResult["PROPERTY_LIST_FULL"][$propertyID]["CODE"] === "RULE"
+				)
+				{
+					$arResult["ERRORS"][] = "Необходимо дать согласие на обработку персональных данных";
+				}
+				else
+				{
+					$arResult["ERRORS"][] = str_replace("#PROPERTY_NAME#", intval($propertyID) > 0 ? $arResult["PROPERTY_LIST_FULL"][$propertyID]["NAME"] : (!empty($arParams["CUSTOM_TITLE_".$propertyID]) ? $arParams["CUSTOM_TITLE_".$propertyID] : GetMessage("IBLOCK_FIELD_".$propertyID)), GetMessage("IBLOCK_ADD_ERROR_REQUIRED"));
+				}
 			}
 		}
 

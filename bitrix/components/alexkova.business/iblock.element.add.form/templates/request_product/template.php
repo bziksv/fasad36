@@ -299,8 +299,10 @@ if (!empty($arResult["ERRORS"])):?>
 											}
 
 											?>
-							<input  type="checkbox" name="PROPERTY[<?=$propertyID?>]<?=$type == "checkbox" ? "[".$key."]" : ""?>" value="<?=$key?>" id="property_<?=$key?>"<?=$checked ? " checked=\"checked\"" : ""?> />
-							Нажимая на эту кнопку, я даю свое <a href="/company/legal/personal-data-consent/">согласие</a> на обработку персональных данных в соответствии с <a href="/company/legal/personal-data-processing/">политикой обработки персональных данных</a>.*<br />
+							<label for="property_<?=$key?>" class="bxr-form-consent">
+								<input type="checkbox" name="PROPERTY[<?=$propertyID?>]<?=$type == "checkbox" ? "[".$key."]" : ""?>" value="<?=$key?>" id="property_<?=$key?>"<?=$checked ? " checked=\"checked\"" : ""?> />
+								Я даю <a href="/company/legal/personal-data-consent/">согласие</a> на обработку персональных данных в соответствии с <a href="/company/legal/personal-data-processing/">политикой обработки персональных данных</a>.
+							</label><br />
 											<?
 										}
 									break;
