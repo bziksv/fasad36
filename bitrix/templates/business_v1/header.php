@@ -82,7 +82,7 @@ $arLeftMenu = array (
 <head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic" rel="stylesheet">
+	<link href="<?=SITE_TEMPLATE_PATH?>/fonts/open-sans/open-sans.css" rel="stylesheet">
         <script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/js/jquery-2.1.4.js"></script>
 	<meta name="yandex-verification" content="ac3e407bd2b12895" />
 	 <meta http-equiv="Content-Type" content="text/html; charset=<?=LANG_CHARSET?>" />  
@@ -117,8 +117,8 @@ $arLeftMenu = array (
 	?>
 	<title><?$APPLICATION->ShowTitle()?></title>
 
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+<script src="<?=SITE_TEMPLATE_PATH?>/js/fancybox5/fancybox.umd.js"></script>
+<link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/js/fancybox5/fancybox.css"/>
 </head>
 
 <body>
