@@ -16,7 +16,7 @@ class CIBlockPropertyFileMan
 		);
 	}
 
-	public function GetPropertyFieldHtmlMulty($arProperty, $arValues, $strHTMLControlName)
+	public static function GetPropertyFieldHtmlMulty($arProperty, $arValues, $strHTMLControlName)
 	{
 		if($strHTMLControlName["MODE"]=="FORM_FILL" && CModule::IncludeModule('fileman'))
 		{
@@ -75,7 +75,7 @@ class CIBlockPropertyFileMan
 		}
 	}
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		global $APPLICATION;
 
@@ -125,7 +125,7 @@ class CIBlockPropertyFileMan
 		}
 	}
 
-	function ConvertToDB($arProperty, $value)
+	public static function ConvertToDB($arProperty, $value)
 	{
 		$result = array();
 		$return = array();
@@ -144,7 +144,7 @@ class CIBlockPropertyFileMan
 		return $return;
 	}
 
-	function ConvertFromDB($arProperty, $value)
+	public static function ConvertFromDB($arProperty, $value)
 	{
 		$return = array();
 		if (strLen(trim($value["VALUE"])) > 0)
@@ -154,7 +154,7 @@ class CIBlockPropertyFileMan
 		return $return;
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$arPropertyFields = array(
 			"HIDE" => array("MULTIPLE_CNT"),

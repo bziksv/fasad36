@@ -6,9 +6,9 @@ $boolDiscountShow = ('Y' == $arElementParams['SHOW_OLD_PRICE']);
 global $DB,$GlobalDate;
 
 $currency = $arElement["PROPERTIES"]["BXR_UNIT_PRICE"]["VALUE"];
-$price = round($arElement["PROPERTIES"]["BXR_PRICE"]["VALUE"]);
+$price = round((float)$arElement["PROPERTIES"]["BXR_PRICE"]["VALUE"]);
 $display_price = number_format($price, 0, ".", " ");
-$discount_price = round($arElement["PROPERTIES"]["BXR_DISCOUNT_PRICE"]["VALUE"]);
+$discount_price = round((float)$arElement["PROPERTIES"]["BXR_DISCOUNT_PRICE"]["VALUE"]);
 $display_discount_price = number_format($discount_price, 0, ".", " ");
 $discount_period_from = strtotime($arElement["PROPERTIES"]["BXR_DISCOUNT_PERIOD_FROM"]["VALUE"]);
 $discount_period_to = strtotime($arElement["PROPERTIES"]["BXR_DISCOUNT_PERIOD_TO"]["VALUE"]);
@@ -22,9 +22,21 @@ $discount_show_type = "none";/*$arParams["BXR_OFFERS_BLOCK"]["BXR_DISCOUNT_SHOW_
 
 ?>
 
-<? if(strlen($arElement['PROPERTIES']['PRICE_FOR_SALE']['VALUE']['TEXT'])): ?>
+<? 
+$priceForSale = $arElement['PROPERTIES']['PRICE_FOR_SALE']['VALUE'] ?? null;
+$priceForSaleText = '';
+if (is_array($priceForSale) && !empty($priceForSale['TEXT'])) {
+	$priceForSaleText = $priceForSale['TEXT'];
+} elseif (is_string($priceForSale) && $priceForSale !== '') {
+	$priceForSaleText = $priceForSale;
+}
+$priceForSaleOut = is_array($arElement['PROPERTIES']['PRICE_FOR_SALE']['~VALUE'] ?? null)
+	? ((is_array($arElement['PROPERTIES']['PRICE_FOR_SALE']['~VALUE'] ?? null) ? ($arElement['PROPERTIES']['PRICE_FOR_SALE']['~VALUE']['TEXT'] ?? '') : ($arElement['PROPERTIES']['PRICE_FOR_SALE']['~VALUE'] ?? '')) ?? '')
+	: ($arElement['PROPERTIES']['PRICE_FOR_SALE']['~VALUE'] ?? $priceForSaleText);
+?>
+<? if(strlen($priceForSaleText)): ?>
 	
-	<span class="bxr-current-price"><?=$arElement['PROPERTIES']['PRICE_FOR_SALE']['~VALUE']['TEXT'];?></span>
+	<span class="bxr-current-price"><?=$priceForSaleOut;?></span>
 	
 <? else: ?>
 

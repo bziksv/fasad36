@@ -155,7 +155,7 @@ class CAllSearch extends CDBResult
 		}
 		elseif(
 			BX_SEARCH_VERSION > 1
-			&& count($this->Query->m_stemmed_words_id)
+			&& count($this->Query->m_stemmed_words_id ?? [])
 			&& array_sum($this->Query->m_stemmed_words_id) === 0
 		)
 		{
@@ -193,9 +193,9 @@ class CAllSearch extends CDBResult
 			if(!array_key_exists("USE_TF_FILTER", $aParamsEx))
 				$aParamsEx["USE_TF_FILTER"] = COption::GetOptionString("search", "use_tf_cache") == "Y";
 
-			$bStem = !$bTagsSearch && count($this->Query->m_stemmed_words)>0;
+			$bStem = !$bTagsSearch && count($this->Query->m_stemmed_words ?? [])>0;
 			//calculate freq of the word on the whole site_id
-			if($bStem && count($this->Query->m_stemmed_words))
+			if($bStem && count($this->Query->m_stemmed_words ?? []))
 			{
 				$arStat = $this->GetFreqStatistics($this->Query->m_lang, $this->Query->m_stemmed_words, $arParams["SITE_ID"]);
 				$this->tf_hwm_site_id = (strlen($arParams["SITE_ID"]) > 0? $arParams["SITE_ID"]: "");
@@ -699,7 +699,7 @@ class CAllSearch extends CDBResult
 			$r["URL_WO_PARAMS"] = $r["URL"];
 
 			$w = $this->Query->m_words;
-			if(count($this->url_add_params))
+			if(count($this->url_add_params ?? []))
 			{
 				$p1 = strpos($r["URL"], "?");
 				if($p1 === false)
@@ -1145,7 +1145,7 @@ class CAllSearch extends CDBResult
 			}
 
 			$strSql = "
-				SELECT CR.RANK
+				SELECT CR.`RANK`
 				FROM b_search_custom_rank CR
 				WHERE CR.SITE_ID in ('".implode("', '", $arSites)."')
 				AND CR.MODULE_ID='".$DB->ForSQL($MODULE_ID)."'
@@ -2028,7 +2028,7 @@ class CAllSearch extends CDBResult
 					case "RANK":
 						if(!($this->flagsUseRatingSort & 0x02))
 							$this->flagsUseRatingSort = 0x01;
-						$arOrder[]=$key." ".$ord;
+						$arOrder[]="`".$key."` ".$ord;
 						break;
 					case "TITLE_RANK":
 					case "CUSTOM_RANK":
@@ -2054,7 +2054,7 @@ class CAllSearch extends CDBResult
 			if(count($arOrder) == 0)
 			{
 				$arOrder[]= "CUSTOM_RANK DESC";
-				$arOrder[]= "RANK DESC";
+				$arOrder[]= "`RANK` DESC";
 				$arOrder[]= $strSearchContentAlias."DATE_CHANGE DESC";
 				$this->flagsUseRatingSort = 0x01;
 			}

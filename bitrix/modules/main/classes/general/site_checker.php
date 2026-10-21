@@ -2439,16 +2439,19 @@ class CSiteCheckerTest
 	# }
 	#
 
-	function CommonTest()
+	public static function CommonTest()
 	{
-		if (defined('BX_CRONTAB') || (defined('CHK_EVENT') && CHK_EVENT === true) || !$_SERVER['HTTP_HOST']) // can't get real HTTP server vars from cron
+		if (defined('BX_CRONTAB') || (defined('CHK_EVENT') && CHK_EVENT === true) || empty($_SERVER['HTTP_HOST'])) // can't get real HTTP server vars from cron
 			return "CSiteCheckerTest::CommonTest();";
-		if (($ntlm_varname = COption::GetOptionString('ldap', 'ntlm_varname', 'REMOTE_USER')) && ($user = trim($_SERVER[$ntlm_varname])))
+		$ntlm_varname = COption::GetOptionString('ldap', 'ntlm_varname', 'REMOTE_USER');
+		if ($ntlm_varname && !empty($_SERVER[$ntlm_varname]) && ($user = trim($_SERVER[$ntlm_varname])))
 			return "CSiteCheckerTest::CommonTest();"; // Server NTLM is enabled, no way to connect through a socket
 
 		IncludeModuleLangFile($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/admin/site_checker.php');
 
 		$step = 0;
+		$oTest = null;
+		$ar = null;
 		while(true)
 		{
 			if (is_object($oTest))

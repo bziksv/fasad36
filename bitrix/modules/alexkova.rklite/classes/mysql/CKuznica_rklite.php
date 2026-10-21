@@ -50,7 +50,7 @@ class CKuznica_rklite extends CKuznica_rklite_general
 		return $DB->Query($sql,false);
 
 	}
-	function GetTypeList($arSort = Array("SORT"=>"ASC"),$arFilter=Array(),$arSelect = Array())
+	public static function GetTypeList($arSort = Array("SORT"=>"ASC"),$arFilter=Array(),$arSelect = Array())
 	{
 		if(is_array($arSelect))
 		{
@@ -253,8 +253,8 @@ class CKuznica_rklite extends CKuznica_rklite_general
 		}
 		return true;
 	}
-	//определение коэффициента
-	function GetKoef($ID=0,$banType="")
+	//РѕРїСЂРµРґРµР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
+	public static function GetKoef($ID=0,$banType="")
 	{
 		$k=0;
 		$banTypeID = intval($banType);
@@ -279,19 +279,19 @@ class CKuznica_rklite extends CKuznica_rklite_general
 			$sum_left_count += $ar_res["LEFT_COUNT"];
 		}
 		if($sum_weight == 0 || $sum_left_count == 0)
-			$k=1;//если обе суммы нулевые, то коэфициент K равен 1
+			$k=1;//РµСЃР»Рё РѕР±Рµ СЃСѓРјРјС‹ РЅСѓР»РµРІС‹Рµ, С‚Рѕ РєРѕСЌС„РёС†РёРµРЅС‚ K СЂР°РІРµРЅ 1
 		else
 			$k = $sum_left_count/$sum_weight;
 		return $k;
 	}
-	//по весу баннера определить его LEFT_SHOWS, установить время обновления этого поля
+	//РїРѕ РІРµСЃСѓ Р±Р°РЅРЅРµСЂР° РѕРїСЂРµРґРµР»РёС‚СЊ РµРіРѕ LEFT_SHOWS, СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РІСЂРµРјСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЌС‚РѕРіРѕ РїРѕР»СЏ
 	function SetLeftCount(&$arFields,$ID=0)
 	{
-		$k = $this->GetKoef($ID,$arFields["BANTYPE"]);
+		$k = self::GetKoef($ID,$arFields["BANTYPE"]);
 		$arFields["LEFT_COUNT"] = round($k*$arFields["WEIGHT"]);
 		$arFields["SHOW_FIRST"] = time();
 	}
-	function UpdateLeftCount($ID,$value)
+	public static function UpdateLeftCount($ID,$value)
 	{
 		$value = intval($value);
 		global $DB;
@@ -301,7 +301,7 @@ class CKuznica_rklite extends CKuznica_rklite_general
 		else
 			return false;
 	}
-	function GetBannersList($banTypeID = "",$limit = 0)// (ID типа баннера, сколько баннеров возвращать)
+	public static function GetBannersList($banTypeID = "",$limit = 0)// (ID пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 	{
 		global $APPLICATION,$DB;
 		$banTypeID = intval($banTypeID);
@@ -496,7 +496,7 @@ class CKuznica_rklite extends CKuznica_rklite_general
 
 		return $DB->Query($sql,false,"<b>Error in </b><br/>File: ".__FILE__."<br/>Line: ".__LINE__."<br/>");
 	}
-	function DeleteStat()
+	public static function DeleteStat()
 	{
 		set_time_limit(0);
 		ignore_user_abort(true);

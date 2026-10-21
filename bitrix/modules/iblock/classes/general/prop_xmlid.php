@@ -3,7 +3,7 @@ IncludeModuleLangFile(__FILE__);
 
 class CIBlockPropertyXmlID
 {
-	function GetPublicViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetPublicViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		static $cache = array();
 		if(isset($strHTMLControlName['MODE']) && $strHTMLControlName["MODE"] == "CSV_EXPORT")
@@ -49,7 +49,7 @@ class CIBlockPropertyXmlID
 		}
 	}
 
-	function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		static $cache = array();
 		if(strlen($value["VALUE"])>0)
@@ -90,7 +90,7 @@ class CIBlockPropertyXmlID
 	//strHTMLControlName - array("VALUE","DESCRIPTION")
 	//return:
 	//safe html
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		$ar_res = false;
 		if(strlen($value["VALUE"]))
@@ -113,7 +113,7 @@ class CIBlockPropertyXmlID
 			'&nbsp;<span id="sp_'.htmlspecialcharsbx($strHTMLControlName["VALUE"]).'" >'.$ar_res['NAME'].'</span>';
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$arPropertyFields = array(
 			"HIDE" => array("ROW_COUNT", "COL_COUNT", "WITH_DESCRIPTION"),

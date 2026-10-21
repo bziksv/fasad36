@@ -95,12 +95,12 @@
 		if(isset($arParams['ROUND_CURRENT_VALUE'])) 
 			$arResult['ROUND_CURRENT_VALUE'] = $arParams['ROUND_CURRENT_VALUE'];
 		else
-			$arResult['ROUND_CURRENT_VALUE'] = round($arResult['CURRENT_VALUE']) == 0? 0: round($arResult['CURRENT_VALUE']);
+			$arResult['ROUND_CURRENT_VALUE'] = round((float)$arResult['CURRENT_VALUE']) == 0? 0: round((float)$arResult['CURRENT_VALUE']);
 			
 		if(isset($arParams['ROUND_PREVIOUS_VALUE'])) 
 			$arResult['ROUND_PREVIOUS_VALUE'] = $arParams['ROUND_PREVIOUS_VALUE'];
 		else
-			$arResult['ROUND_PREVIOUS_VALUE'] = round($arResult['PREVIOUS_VALUE']) == 0? 0: round($arResult['PREVIOUS_VALUE']);
+			$arResult['ROUND_PREVIOUS_VALUE'] = round((float)$arResult['PREVIOUS_VALUE']) == 0? 0: round((float)$arResult['PREVIOUS_VALUE']);
 	}
 	
 	if (!(isset($arParams['TEMPLATE_HIDE']) && $arParams['TEMPLATE_HIDE'] == 'Y'))

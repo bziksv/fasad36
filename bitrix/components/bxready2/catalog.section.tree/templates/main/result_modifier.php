@@ -12,6 +12,10 @@ if(!empty($arParams["IBLOCK_ID"]) && (isset($arParams["SHOW_SECTION_NAME"]) && $
 
 $arResult['ELEMENTS'] = array();
 
+if (!is_array($arResult['SECTION_TREE']['CHILD'] ?? null)) {
+	$arResult['SECTION_TREE']['CHILD'] = array();
+}
+
 foreach ($arResult['SECTION_TREE']['CHILD'] as $cell=>$val){
 
 	$arSection = array(
@@ -35,7 +39,7 @@ foreach ($arResult['SECTION_TREE']['CHILD'] as $cell=>$val){
 		$arSection['PREVIEW_TEXT'] = $val["DESCRIPTION"];
 	}
 
-	if (count($val['CHILD'])>0){
+	if (is_array($val['CHILD'] ?? null) && count($val['CHILD'])>0){
 		foreach ($val['CHILD'] as $cell2=>$child){
 			$arChild = array(
 				'NAME' => $child["NAME"],

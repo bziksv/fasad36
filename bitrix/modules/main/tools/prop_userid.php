@@ -17,7 +17,7 @@ class CIBlockPropertyUserID
 		);
 	}
 
-	function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		static $cache = array();
 		$value = intVal($value["VALUE"]);
@@ -42,7 +42,7 @@ class CIBlockPropertyUserID
 	//return:
 	//safe html
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		global $USER;
 		$default_value = intVal($value["VALUE"]);
@@ -105,7 +105,7 @@ class CIBlockPropertyUserID
 	//$value - array("VALUE",["DESCRIPTION"]) -- here comes HTML form value
 	//return:
 	//DB form of the value
-	function ConvertToDB($arProperty, $value)
+	public static function ConvertToDB($arProperty, $value)
 	{
 		$value["VALUE"] = intval($value["VALUE"]);
 		if($value["VALUE"] <= 0)
@@ -113,7 +113,7 @@ class CIBlockPropertyUserID
 		return $value;
 	}
 
-	function ConvertFromDB($arProperty, $value)
+	public static function ConvertFromDB($arProperty, $value)
 	{
 		$value["VALUE"] = intval($value["VALUE"]);
 		if($value["VALUE"] <= 0)
@@ -121,7 +121,7 @@ class CIBlockPropertyUserID
 		return $value;
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$arPropertyFields = array(
 			"HIDE" => array("WITH_DESCRIPTION"),

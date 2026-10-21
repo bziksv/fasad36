@@ -285,7 +285,7 @@ class CSearchLanguage
 		//or parent::GuessLanguage for futher processing
 	}
 
-	function GuessLanguage($text, $lang=false)
+	public static function GuessLanguage($text, $lang=false)
 	{
 		if(strlen($text) <= 0)
 			return false;
@@ -294,7 +294,8 @@ class CSearchLanguage
 		if(empty($cache))
 		{
 			$cache[] = "en";//English is always in mind and on the first place
-			$rsLanguages = CLanguage::GetList(($b=""), ($o=""));
+			$b=""; $o="";
+			$rsLanguages = CLanguage::GetList($b, $o);
 			while($arLanguage = $rsLanguages->Fetch())
 				if($arLanguage["LID"] != "en")
 					$cache[] = $arLanguage["LID"];
@@ -423,7 +424,7 @@ class CSearchLanguage
 	}
 
 	//Compare to results of text analysis
-	function cmp($a, $b)
+	public static function cmp($a, $b)
 	{
 		if($a[0] && !$b[0]) //On first place we check if model supports bigrams check
 			return -1;

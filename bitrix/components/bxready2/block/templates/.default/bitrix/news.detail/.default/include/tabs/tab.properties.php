@@ -1,5 +1,5 @@
 <?if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();?>
-<?if (is_array($arResult["DISPLAY_PROPERTIES"]) && count($arResult["DISPLAY_PROPERTIES"])>0):?>
+<?if (is_array($arResult["DISPLAY_PROPERTIES"]) && count($arResult["DISPLAY_PROPERTIES"] ?? [])>0):?>
 <table width="100%" class="bxr-props-table">
 	<?foreach($arResult["DISPLAY_PROPERTIES"] as $key => $arProperty):?>
 
@@ -8,7 +8,7 @@
 					<td class="bxr-props-name"><span itemprop="name"><?=$arProperty["NAME"]?></span></td>
 					<td class="bxr-props-data"><span itemprop="value"><?=$arProperty["DISPLAY_VALUE"]?></span></td>
 				</tr>
-			<?}elseif (is_array($arProperty["DISPLAY_VALUE"]) && count($arProperty["DISPLAY_VALUE"]>0)){?>
+			<?}elseif (is_array($arProperty["DISPLAY_VALUE"]) && count($arProperty["DISPLAY_VALUE"])>0){?>
 				<?
 				$withDesc = false;
 				foreach($arProperty["DESCRIPTION"] as $cell=>$val){

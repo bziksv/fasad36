@@ -413,7 +413,7 @@ function ExecuteModuleEvent($arEvent, $param1=NULL, $param2=NULL, $param3=NULL, 
 	for($i = $CNT_PREDEF + 1; $i < $nArgs; $i++)
 		$args[] = func_get_arg($i);
 
-	//TODO: Возможно заменить на EventManager::getInstance()->getLastEvent();
+	//TODO: Г‚Г®Г§Г¬Г®Г¦Г­Г® Г§Г Г¬ГҐГ­ГЁГІГј Г­Г  EventManager::getInstance()->getLastEvent();
 	global $BX_MODULE_EVENT_LAST;
 	$BX_MODULE_EVENT_LAST = $arEvent;
 
@@ -463,7 +463,7 @@ function ExecuteModuleEventEx($arEvent, $arParams = array())
 
 	if(array_key_exists("CALLBACK", $arEvent))
 	{
-		//TODO: Возможно заменить на EventManager::getInstance()->getLastEvent();
+		//TODO: Г‚Г®Г§Г¬Г®Г¦Г­Г® Г§Г Г¬ГҐГ­ГЁГІГј Г­Г  EventManager::getInstance()->getLastEvent();
 		global $BX_MODULE_EVENT_LAST;
 		$BX_MODULE_EVENT_LAST = $arEvent;
 
@@ -472,11 +472,11 @@ function ExecuteModuleEventEx($arEvent, $arParams = array())
 		else
 			$args = $arParams;
 
-		return call_user_func_array($arEvent["CALLBACK"], $args);
+		return bx_invoke_event_callback($arEvent["CALLBACK"], $args);
 	}
 	elseif($arEvent["TO_CLASS"] != "" && $arEvent["TO_METHOD"] != "")
 	{
-		//TODO: Возможно заменить на EventManager::getInstance()->getLastEvent();
+		//TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ EventManager::getInstance()->getLastEvent();
 		global $BX_MODULE_EVENT_LAST;
 		$BX_MODULE_EVENT_LAST = $arEvent;
 
@@ -487,12 +487,40 @@ function ExecuteModuleEventEx($arEvent, $arParams = array())
 
 		//php bug: http://bugs.php.net/bug.php?id=47948
 		class_exists($arEvent["TO_CLASS"]);
-		return call_user_func_array(array($arEvent["TO_CLASS"], $arEvent["TO_METHOD"]), $args);
+		return bx_invoke_event_callback(array($arEvent["TO_CLASS"], $arEvent["TO_METHOD"]), $args);
 	}
 	else
 	{
 		return $r;
 	}
+}
+
+/**
+ * PHP 8+ compatible event callback invoker (legacy Bitrix registers non-static handlers).
+ */
+function bx_invoke_event_callback($callback, array $args = array())
+{
+	if (is_callable($callback))
+	{
+		return call_user_func_array($callback, $args);
+	}
+
+	if (is_array($callback) && count($callback) >= 2)
+	{
+		$class = $callback[0];
+		$method = $callback[1];
+		if (is_string($class) && class_exists($class) && method_exists($class, $method))
+		{
+			$rm = new ReflectionMethod($class, $method);
+			if ($rm->isStatic())
+			{
+				return $rm->invokeArgs(null, $args);
+			}
+			return $rm->invokeArgs($rm->getDeclaringClass()->newInstanceWithoutConstructor(), $args);
+		}
+	}
+
+	return null;
 }
 
 function UnRegisterModuleDependences($FROM_MODULE_ID, $MESSAGE_ID, $TO_MODULE_ID, $TO_CLASS="", $TO_METHOD="", $TO_PATH="", $TO_METHOD_ARG = array())

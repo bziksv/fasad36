@@ -11,7 +11,7 @@
 </div>
 <?if (!is_array($arResult['SMART_LINK'])) $arResult['SMART_LINK'] = array();
 
-if (count($arResult['SMART_LINK'])>0){
+if (count($arResult['SMART_LINK'] ?? [])>0){
 	global $arGlobalSmartLink;
 	if (!isset($arGlobalSmartLink) || !is_array($arGlobalSmartLink)){
 		$arGlobalSmartLink = $arResult['SMART_LINK'];

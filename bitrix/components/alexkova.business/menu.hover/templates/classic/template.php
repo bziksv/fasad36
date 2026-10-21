@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 ?>
 
 <?
-    if(!function_exists(bxr_classic_build_tree)) {
+    if(!function_exists('bxr_classic_build_tree')) {
         function bxr_classic_build_tree($mas, $ico = "N", $arColor = array("li" => "", "li_selected" => "", "ico_1" => "color", "ico_2" => "light"), $arParams = [], $lvl=1) { 
             
             if(!is_array($mas))

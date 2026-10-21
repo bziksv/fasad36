@@ -341,7 +341,7 @@ class CAllIBlockProperty
 	///////////////////////////////////////////////////////////////////
 	// This one called before any Update or Add
 	///////////////////////////////////////////////////////////////////
-	function CheckFields(&$arFields, $ID=false, $bFormValidate=false)
+	public static function CheckFields(&$arFields, $ID=false, $bFormValidate=false)
 	{
 		/** @var CMain $APPLICATION */
 		global $APPLICATION;

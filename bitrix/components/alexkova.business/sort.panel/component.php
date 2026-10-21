@@ -71,7 +71,7 @@ if (isset($_REQUEST["num"]))
 if (isset($_REQUEST["view"]))
     setNewSort(array("view"=>$_REQUEST["view"]));
 
-if (isset($_SESSION["USER_SORTPANEL"]) && is_array($_SESSION["USER_SORTPANEL"]) && count($_SESSION["USER_SORTPANEL"]>0))
+if (isset($_SESSION["USER_SORTPANEL"]) && is_array($_SESSION["USER_SORTPANEL"]) && !empty($_SESSION["USER_SORTPANEL"]))
 {
     foreach ($_SESSION["USER_SORTPANEL"] as $cell=>$val)
     {

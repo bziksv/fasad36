@@ -149,7 +149,7 @@
             ?>
             <li <?if($arItem['SELECTED'] == 1) echo "data-selected='1' ";?>  class=" <?=$classLi;?><?if($arItem['SELECTED'] == 1) echo " " . $classLiSelected2;?>">
 				<? if (in_array($arItem['PARAMS']['ID'], getIndexes())): ?>
-					<a href="<?=$arItem["LINK"]?>" text-js='<?=$glyphicon_left;?><span class="bxr-ico-left-hover-menu"><?=$s_ico . $s_ico_h; ?></span><?=$arItem[TEXT].$glyphicon_right;?>'></a>
+					<a href="<?=$arItem["LINK"]?>" text-js='<?=$glyphicon_left;?><span class="bxr-ico-left-hover-menu"><?=$s_ico . $s_ico_h; ?></span><?=$arItem["TEXT"].$glyphicon_right;?>'></a>
 				<? else: ?>
 					<a href="<?=$arItem["LINK"]?>"><?=$glyphicon_left;?><span class='bxr-ico-left-hover-menu'><?=$s_ico . $s_ico_h; ?></span><?=$arItem["TEXT"].$glyphicon_right;?></a>
 				<? endif; ?>

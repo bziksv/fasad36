@@ -72,7 +72,7 @@ class CSearchCustomRank
 				,CR.PARAM1
 				,CR.PARAM2
 				,CR.ITEM_ID
-				,CR.RANK
+				,CR.`RANK`
 			FROM
 				b_search_custom_rank CR
 			".$sFilter.$sOrder;

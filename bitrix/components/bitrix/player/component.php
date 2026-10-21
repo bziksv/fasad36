@@ -16,7 +16,7 @@ if ($ext == 'swf' && $arParams['ALLOW_SWF'] != 'Y')
 
 CUtil::InitJSCore(array('ajax'));
 
-if (!function_exists(escapeFlashvar))
+if (!function_exists('escapeFlashvar'))
 {
 	function escapeFlashvar($str)
 	{

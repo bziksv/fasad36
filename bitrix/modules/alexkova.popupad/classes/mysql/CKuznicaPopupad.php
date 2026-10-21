@@ -49,7 +49,7 @@ class CKuznicaPopupad extends CKuznicaPopupadGeneral
 
     }
 
-    function GetByID($ID)
+    public static function GetByID($ID)
     {
         $ID = intval($ID);
         if($ID>0)
@@ -125,7 +125,7 @@ class CKuznicaPopupad extends CKuznicaPopupadGeneral
             return true;
     }
 
-    function Delete($ID)
+    public static function Delete($ID)
     {
         global $DB,$strError;
         $ID = intval($ID);
@@ -146,7 +146,7 @@ class CKuznicaPopupad extends CKuznicaPopupadGeneral
 
     }
 
-    function GetKoef($ID=0)
+    public static function GetKoef($ID=0)
     {
         $k=0;
         global $DB;
@@ -175,11 +175,11 @@ class CKuznicaPopupad extends CKuznicaPopupadGeneral
     }
     function SetLeftCount(&$arFields,$ID=0)
     {
-        $k = $this->GetKoef($ID);
+        $k = self::GetKoef($ID);
         $arFields["LEFT_COUNT"] = round($k*$arFields["WEIGHT"]);
         $arFields["SHOW_FIRST"] = time();
     }
-    function UpdateLeftCount($ID,$value)
+    public static function UpdateLeftCount($ID,$value)
     {
         $value = intval($value);
         global $DB;
@@ -189,7 +189,7 @@ class CKuznicaPopupad extends CKuznicaPopupadGeneral
         else
             return false;
     }
-    function GetBannersList($limit = 0)
+    public static function GetBannersList($limit = 0)
     {
         global $APPLICATION,$DB;
         $limit= intval($limit);
@@ -206,13 +206,13 @@ class CKuznicaPopupad extends CKuznicaPopupadGeneral
         $res = $DB->Query($sql,false,"<b>Error in </b><br/>File: ".__FILE__."<br/>Line: ".__LINE__."<br/>");
         return $res;
     }
-    function OnPrologHandler()
+    public static function OnPrologHandler()
     {
         $_SESSION["POPUPAD"]["BANNERS"] = array();
 
     }
 
-    function BannerEpilogStart(){
+    public static function BannerEpilogStart(){
         global $APPLICATION;
         if(
             isset($_SERVER['HTTP_X_REQUESTED_WITH'])

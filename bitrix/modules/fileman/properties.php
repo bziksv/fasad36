@@ -10,22 +10,22 @@ class CIBlockPropertyMapInterface
 		return array();
 	}
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		return '';
 	}
 
-	function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		return $value['VALUE'];
 	}
 
-	function GetPublicViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetPublicViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		return '';
 	}
 
-	function ConvertFromDB($arProperty, $value)
+	public static function ConvertFromDB($arProperty, $value)
 	{
 		$arResult = array('VALUE' => '');
 
@@ -43,7 +43,7 @@ class CIBlockPropertyMapInterface
 		return $arResult;
 	}
 
-	function ConvertToDB($arProperty, $value)
+	public static function ConvertToDB($arProperty, $value)
 	{
 		$arResult = array('VALUE' => '');
 
@@ -100,7 +100,7 @@ class CIBlockPropertyMapGoogle extends CIBlockPropertyMapInterface
 		);
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$settings = \CIBlockPropertyMapGoogle::PrepareSettings($arProperty);
 		$settings = $settings['USER_TYPE_SETTINGS'];
@@ -115,7 +115,7 @@ class CIBlockPropertyMapGoogle extends CIBlockPropertyMapInterface
 			</tr>';
 	}
 
-	function PrepareSettings($arProperty)
+	public static function PrepareSettings($arProperty)
 	{
 		return array(
 			'USER_TYPE_SETTINGS' => array(
@@ -124,7 +124,7 @@ class CIBlockPropertyMapGoogle extends CIBlockPropertyMapInterface
 		);
 	}
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		global $APPLICATION;
 
@@ -646,7 +646,7 @@ var jsGoogleCESearch_<?echo $MAP_ID;?> = {
 	return $out;
 	}
 
-	function GetPublicViewHTML($arProperty, $value, $arParams)
+	public static function GetPublicViewHTML($arProperty, $value, $arParams)
 	{
 		$s = '';
 		if(strlen($value["VALUE"])>0)
@@ -752,7 +752,7 @@ function saveYandexKey(domain, input)
 <?
 	} // _DrawKeyInputControl()
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		global $APPLICATION;
 
@@ -1255,7 +1255,7 @@ function saveYandexKey(domain, input)
 		return $out;
 	}
 
-	function GetPublicEditHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetPublicEditHTML($arProperty, $value, $strHTMLControlName)
 	{
 		global $APPLICATION;
 
@@ -1837,7 +1837,7 @@ function saveYandexKey(domain, input)
 		return $out;
 	}
 
-	function GetPublicViewHTML($arProperty, $value, $arParams)
+	public static function GetPublicViewHTML($arProperty, $value, $arParams)
 	{
 		$s = '';
 		if ($arParams['MODE'] == 'CSV_EXPORT')
@@ -2654,40 +2654,40 @@ class CIBlockPropertyVideo extends CVideoProperty
 		);
 	}
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		$dbVal = CUserTypeVideo::BaseConvertToDB($value["VALUE"]);
 		$val = CUserTypeVideo::BaseConvertFromDB($dbVal);
 		return CIBlockPropertyVideo::BaseGetEditFormHTML($arProperty["USER_TYPE_SETTINGS"], $val, $strHTMLControlName["VALUE"], $strHTMLControlName["MODE"]);
 	}
 
-	function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetAdminListViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		return CIBlockPropertyVideo::BaseGetAdminListViewHTML($value["VALUE"]);
 	}
 
-	function GetPublicViewHTML($arProperty, $value, $strHTMLControlName)
+	public static function GetPublicViewHTML($arProperty, $value, $strHTMLControlName)
 	{
 		return CIBlockPropertyVideo::BaseGetPublicHTML($arProperty["USER_TYPE_SETTINGS"], $value["VALUE"]);
 	}
 
-	function ConvertFromDB($arProperty, $value)
+	public static function ConvertFromDB($arProperty, $value)
 	{
 		$value['VALUE'] = CIBlockPropertyVideo::BaseConvertFromDB($value['VALUE']);
 		return $value;
 	}
 
-	function ConvertToDB($arProperty, $value)
+	public static function ConvertToDB($arProperty, $value)
 	{
 		return CIBlockPropertyVideo::BaseConvertToDB($value["VALUE"]);
 	}
 
-	function CheckFields($arProperty, $value)
+	public static function CheckFields($arProperty, $value)
 	{
 		return CIBlockPropertyVideo::BaseCheckFields($value["VALUE"]);
 	}
 
-	function GetLength($arProperty, $value)
+	public static function GetLength($arProperty, $value)
 	{
 		if(
 			is_array($value)
@@ -2719,7 +2719,7 @@ class CIBlockPropertyVideo extends CVideoProperty
 		return 0;
 	}
 
-	function PrepareSettings($arProperty)
+	public static function PrepareSettings($arProperty)
 	{
 		$arResult = CUserTypeVideo::BasePrepareSettings($arProperty, "USER_TYPE_SETTINGS");
 		$arResult['SMART_FILTER'] = 'N';
@@ -2728,7 +2728,7 @@ class CIBlockPropertyVideo extends CVideoProperty
 		return $arFields;
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$arPropertyFields = array(
 			"HIDE" => array("FILTRABLE", "ROW_COUNT", "COL_COUNT", "DEFAULT_VALUE", "SMART_FILTER"), //will hide the field

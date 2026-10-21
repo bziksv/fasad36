@@ -147,7 +147,7 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 		\Bitrix\Main\Config\Option::set(self::$moduleID, $templateCode.'_bxr_area_'.$areaCode, $version);
 	}
 
-	public function getBitrixTopPanelMenu(){
+	public static function getBitrixTopPanelMenu(){
 
 
 		global $USER, $APPLICATION;
@@ -157,7 +157,7 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 			&& $USER->IsAdmin()
 			&& self::getManagementMode()){
 
-			$arMenu = array(); // подпункты меню
+			$arMenu = array(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
 			// create top line list
 
@@ -192,18 +192,18 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 						"DEFAULT" => false,
 						"MENU" => $arExtMenu,
 					);
-					$arMenu[] = array('SEPARATOR' => "Y"); // разделитель
+					$arMenu[] = array('SEPARATOR' => "Y"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				}
 			}
 
 			if (0 < sizeof($arMenu)):
 				$APPLICATION->AddPanelButton(array(
-					"HREF" => '', // можно и ссылку. в таком вариант при нажатии откроется меню
+					"HREF" => '', // пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					"TITLE" => GetMessage('BXR_MANAGER'),
 					"ICON" => 'panel-edit-text',
 					"ALT" => GetMessage('BXR_MANAGER_DESCRIPTION'),
 					"TEXT" => GetMessage('BXR_MANAGER_DESCRIPTION'),
-					"MAIN_SORT" => 2000, // после всех кнопок
+					"MAIN_SORT" => 2000, // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 					"SORT" => 100,
 					"MENU" => $arMenu,
 				));

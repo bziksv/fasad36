@@ -67,7 +67,7 @@ $arParams["IDENTIFICATOR"] = (empty($arParams["~IDENTIFICATOR"]) ? '' : $arParam
 <div class="iblock-vote" id="vote_<?=$arParams["IDENTIFICATOR"]?><?= $arResult["ID"]?>" title="<?= $title?>">
 	<?foreach($arResult["VOTE_NAMES"] as $i => $name):
 		$id = 'vote_'.$arResult["ID"].'_'.$i;
-		$class = "photo-rating-star".(($DISPLAY_VALUE && round($DISPLAY_VALUE) > $i) ? " photo-rating-star-select" : "");
+		$class = "photo-rating-star".(($DISPLAY_VALUE && round((float)$DISPLAY_VALUE) > $i) ? " photo-rating-star-select" : "");
 	?>
 		<span id="vote_<?=$arResult["ID"]?>_<?=$i?>" class="<?= $class?>"
 			<?if(!$arResult["VOTED"]):?>

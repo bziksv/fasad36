@@ -85,8 +85,12 @@ if((isset($_SERVER['REDIRECT_STATUS']) && $_SERVER['REDIRECT_STATUS'] == '404') 
 
 			$_GET += $vars;
 			$_REQUEST += $vars;
-			if (ini_get_bool("register_globals"))
-				$GLOBALS += $vars;
+			// register_globals removed in PHP 5.4; $GLOBALS += is fatal in PHP 8.1+
+			if (function_exists('ini_get_bool') && ini_get_bool("register_globals"))
+			{
+				foreach ($vars as $k => $v)
+					$GLOBALS[$k] = $v;
+			}
 
 			$_SERVER["QUERY_STRING"] = $QUERY_STRING = CHTTP::urnEncode($params);
 		}

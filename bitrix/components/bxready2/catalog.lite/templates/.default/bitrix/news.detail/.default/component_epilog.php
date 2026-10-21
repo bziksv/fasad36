@@ -10,7 +10,7 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<?if (count($arResult['SMART_LINK'])>0){
+<?if (count($arResult['SMART_LINK'] ?? [])>0){
 	global $arGlobalSmartLink;
 	if (!isset($arGlobalSmartLink) || !is_array($arGlobalSmartLink)){
 		$arGlobalSmartLink = $arResult['SMART_LINK'];

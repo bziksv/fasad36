@@ -44,7 +44,7 @@ class Core {
 		}
 	}
 
-        public function getUfSection($iblock_id, $section_id, $UfCode){
+        public static function getUfSection($iblock_id, $section_id, $UfCode){
               
             if(empty($section_id) || empty($iblock_id) || empty($UfCode))
                 return false;
@@ -56,6 +56,7 @@ class Core {
                     return false;
             }
             
+            $sectionIds = array();
             $nav = \CIBlockSection::GetNavChain(false, $section_id);
             while($section = $nav->Fetch()){
                 $sectionIds[] = $section["ID"];

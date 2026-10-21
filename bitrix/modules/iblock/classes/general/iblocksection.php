@@ -8,7 +8,7 @@ class CAllIBlockSection
 	protected static $arSectionPathCache = array();
 	protected static $arSectionNavChainCache = array();
 
-	function GetFilter($arFilter=Array())
+	public static function GetFilter($arFilter=Array())
 	{
 		global $DB;
 		$arIBlockFilter = Array();
@@ -2341,7 +2341,7 @@ class CAllIBlockSection
 		return $res["CNT"];
 	}
 
-	function _check_rights_sql($min_permission)
+	public static function _check_rights_sql($min_permission)
 	{
 		global $DB, $USER;
 		$min_permission = (strlen($min_permission)==1) ? $min_permission : "R";

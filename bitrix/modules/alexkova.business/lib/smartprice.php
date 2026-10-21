@@ -13,7 +13,7 @@ class Smartprice extends \Alexkova\Business\Core {
 	static $defaultPriceCode = 'BXR_SMART_PRICE';
 	static $defaultRelatedCode = 'BXR_SMART_PRICE_PARENT';
 
-	static public function getComponentParams($arCurrentValues) {
+	static public static function getComponentParams($arCurrentValues) {
 
 		$arDefaultSettings = array();
 

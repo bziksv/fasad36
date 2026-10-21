@@ -3,7 +3,7 @@ IncludeModuleLangFile(__FILE__);
 
 class CIBlockPropertyElementList
 {
-	function PrepareSettings($arProperty)
+	public static function PrepareSettings($arProperty)
 	{
 		$size = 0;
 		if(is_array($arProperty["USER_TYPE_SETTINGS"]))
@@ -35,7 +35,7 @@ class CIBlockPropertyElementList
 		);
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$settings = CIBlockPropertyElementList::PrepareSettings($arProperty);
 
@@ -69,7 +69,7 @@ class CIBlockPropertyElementList
 	//strHTMLControlName - array("VALUE","DESCRIPTION")
 	//return:
 	//safe html
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		$settings = CIBlockPropertyElementList::PrepareSettings($arProperty);
 		if($settings["size"] > 1)
@@ -93,7 +93,7 @@ class CIBlockPropertyElementList
 		return  $html;
 	}
 
-	function GetPropertyFieldHtmlMulty($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtmlMulty($arProperty, $value, $strHTMLControlName)
 	{
 		$max_n = 0;
 		$values = array();
@@ -166,7 +166,7 @@ class CIBlockPropertyElementList
 		return  $html;
 	}
 
-	function GetAdminFilterHTML($arProperty, $strHTMLControlName)
+	public static function GetAdminFilterHTML($arProperty, $strHTMLControlName)
 	{
 		$lAdmin = new CAdminList($strHTMLControlName["TABLE_ID"]);
 		$lAdmin->InitFilter(array($strHTMLControlName["VALUE"]));
@@ -198,7 +198,7 @@ class CIBlockPropertyElementList
 		return  $html;
 	}
 
-	public function GetPublicViewHTML($arProperty, $arValue, $strHTMLControlName)
+	public static function GetPublicViewHTML($arProperty, $arValue, $strHTMLControlName)
 	{
 		static $cache = array();
 

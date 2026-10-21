@@ -116,7 +116,7 @@ foreach($arTabs['TABS'] as $cell=>$val){
 	}
 }
 
-if (count($arTabs['TABS'])>0){
+if (count($arTabs['TABS'] ?? [])>0){
 	asort($arTabs['TABS']);
 }
 
@@ -192,7 +192,7 @@ if ($arParams["BXR_DETAIL_TABS"]['BXR_DETAIL_TAB_FILES'] == "Y"){
         }
     }
     
-	if (is_array($arResult['PROPERTIES']['BXR_FILES']['VALUE']) && count($arResult['PROPERTIES']['BXR_FILES']['VALUE'])>0){
+	if (is_array($arResult['PROPERTIES']['BXR_FILES']['VALUE']) && count($arResult['PROPERTIES']['BXR_FILES']['VALUE'] ?? [])>0){
 		foreach($arResult['PROPERTIES']['BXR_FILES']['VALUE'] as $cell => $val){
 			$arFileData = CFile::GetFileArray($val);
 			$arFileData['DESCRIPTION'] = $arResult['PROPERTIES']['BXR_FILES']['DESCRIPTION'][$cell];
@@ -289,7 +289,7 @@ foreach ($arResult['DISPLAY_PROPERTIES'] as $cell=>$val){
 
 
 if ($arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_PROPERTIES"] == "Y"){
-	if (count($arResult['DISPLAY_PROPERTIES'])>0){
+	if (count($arResult['DISPLAY_PROPERTIES'] ?? [])>0){
 		if (strlen($arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_PROPERTIES_LINK"]) >0){
 			$arSmartLink['PROPERTIES'] = array(
 				"NAME" => $arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_PROPERTIES_LINK"],
@@ -303,7 +303,7 @@ if ($arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_PROPERTIES"] == "Y"){
 }
 
 if ($arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_SKU"] == "Y"){
-	if (count($arResult['OFFERS'])>0){
+	if (count($arResult['OFFERS'] ?? [])>0){
 		if (strlen($arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_SKU_LINK"]) >0){
 			$arSmartLink['SKU'] = array(
 				"NAME" => $arParams["BXR_DETAIL_TABS"]["BXR_DETAIL_TAB_SKU_LINK"],

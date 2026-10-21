@@ -131,7 +131,7 @@ class CKuznicaPopupadGeneral
 		return true;
 	}
 	
-	function getContent($imageID,$flashTransparent="",$olink="",$isPublic = false,$arFields = array())
+	public static function getContent($imageID,$flashTransparent="",$olink="",$isPublic = false,$arFields = array())
 	{
 		global $APPLICATION;
 		$info = unserialize($arFields["~INFO"]);
@@ -303,7 +303,7 @@ class CKuznicaPopupadGeneral
 		
 		return $arIcons;
 	}
-	function incShow($arIDs)
+	public static function incShow($arIDs)
 	{
 		if(count($arIDs)>0)
 		{
@@ -315,7 +315,7 @@ class CKuznicaPopupadGeneral
 		}
 		return false;
 	}
-	function GetBanners($limit = 0, $backurl = '')
+	public static function GetBanners($limit = 0, $backurl = '')
 	{
 		$arNew = array();
 		$arCPM = array();
@@ -340,36 +340,36 @@ class CKuznicaPopupadGeneral
 				continue;
 			}
 			if($arBanner["SHOW_FIRST"]<$arBanner["SHOW_FROM_X"] && $arBanner["SHOW_FROM_X"]>0)
-			{//сюда попадают ещё не показанные баннеры
+			{//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				$arNew[$arBanner["ID"]] = $arBanner;
 			}
 			else
-			{//старые баннеры
+			{//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				$arCPM[$arBanner["ID"]] = $arBanner;
 				$sumLeftCount += $arBanner["LEFT_COUNT"];
 			}
 		}
 
-		//если сумма LEFT_COUNT всех старых баннеров равна нулю, то им всем надо установить LEFT_COUNT=WEIGHT
+		//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ LEFT_COUNT пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LEFT_COUNT=WEIGHT
 		if($sumLeftCount == 0)
-			foreach ($arCPM as $arBanner)//старые баннеры
+			foreach ($arCPM as $arBanner)//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					CKuznicaPopupad::UpdateLeftCount($arBanner["ID"],$arBanner["WEIGHT"]);
 
 
-		//расчет коэффициента - он одинаков для всех новых баннеров
+		//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		$k = CKuznicaPopupad::GetKoef();
-		foreach ($arNew as &$arBanner)//новые баннеры
+		foreach ($arNew as &$arBanner)//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-				//расчет оставшихся показов
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				$arBanner["LEFT_COUNT"] = $k*$arBanner["WEIGHT"];
-				//запись нового значения LEFT_COUNT в таблицу
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LEFT_COUNT пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				CKuznicaPopupad::UpdateLeftCount($arBanner["ID"],$arBanner["LEFT_COUNT"]);
-				//добавление нового баннера к старым
+				//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				$arCPM[$arBanner["ID"]] = $arBanner;
 		}
 		foreach ($arCPM as $bannerID=>$arBanner)
 		{
-			//таргетинг
+			//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			$bError = false;
 
 			if(!empty($arBanner["SHOW_ON"]))
@@ -409,20 +409,20 @@ class CKuznicaPopupadGeneral
 				}
 			}
 
-			if(!$bError)//если баннер можно показывать, считаем CPM, добавляем в массив для сортировки
+			if(!$bError)//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ CPM, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			{
-				//если запрос вернул баннеров больше, чем в параметре компонента, то сортировка по CPM, иначе по WEIGHT
+				//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ CPM, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ WEIGHT
 //				if($limit>0 && $allCnt>$limit)
 					$arSort[$bannerID] = $arBanner["WEIGHT"]/($arBanner["WEIGHT"]-$arBanner["LEFT_COUNT"]+0.01);
 //				else
 //					$arSort[$bannerID] = $arBanner["WEIGHT"];
 			}
 		}
-		//обратная сортировка с сохранением ключей
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		arsort($arSort);
 		$arReturn = array();
 		$cnt = 1;
-		$defaultModeDone = false;//баннер в обычном режиме должен быть только один
+		$defaultModeDone = false;//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
 		$hideFancy = COption::GetOptionString(self::MODULE_ID, "POPUP_HIDE_FANCY", '');
 		$hideIcons = COption::GetOptionString(self::MODULE_ID, "POPUP_HIDE_ICON", '');
@@ -439,20 +439,20 @@ class CKuznicaPopupadGeneral
 				if(/*in_array($banner["INFO"]["ICON_PLACE"],$iconExistedPlaces)
 					|| */
 					!$banner["INFO"]["ICON_FILE"]
-					|| $hideIcons == "Y"//глобальное отключение иконок
+					|| $hideIcons == "Y"//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				)
 					continue;
 //				else
 //					$iconExistedPlaces[] = $banner["INFO"]["ICON_PLACE"];
 			}elseif($defaultModeDone
-				|| $hideFancy == "Y"//глобальное отключение обычных баннеров
+				|| $hideFancy == "Y"//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				|| $_COOKIE["KZNC_PROTECT_BANER_SHOW_TIME"]
 			){
 				continue;
 			}else{
 				$defaultModeDone = true;
 			}
-			//нужное количество баннеров сохраняется в массив, и для каждого уменьшается LEFT_COUNT
+			//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LEFT_COUNT
 			$arReturn[] = $banner;
 			$_SESSION["POPUPAD"]["BANNERS"][] = $bannerID;
 			if($banner["LEFT_COUNT"]>0 && $allCnt>$limit)
@@ -463,7 +463,7 @@ class CKuznicaPopupadGeneral
 		}
 		return $arReturn;
 	}
-	function ResetBannersLeftCount()
+	public static function ResetBannersLeftCount()
 	{
 		global $DB;
 		$strSql = "UPDATE kznc_popupad_banner SET LEFT_COUNT=WEIGHT AND SHOW_FIRST=NOW()";

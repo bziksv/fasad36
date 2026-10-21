@@ -13,7 +13,7 @@ Loc::loadMessages(__FILE__);
 
 class Templates extends \Alexkova\Bxready2\Allbxready{
 
-	private function isValidTemplate($arTemplate){
+	private static function isValidTemplate($arTemplate){
 
 		if (!is_array($arTemplate)) return false;
 
@@ -120,7 +120,7 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 
 	}
 
-	private function Localize($arTemplate, $areaList){
+	private static function Localize($arTemplate, $areaList){
 
 		$newAreaList = $areaList;
 		$context = Context::getCurrent();;
@@ -147,7 +147,7 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 		\Bitrix\Main\Config\Option::set(self::$moduleID, $templateCode.'_bxr_area_'.$areaCode, $version);
 	}
 
-	public function getBitrixTopPanelMenu(){
+	public static function getBitrixTopPanelMenu(){
 
 
 		global $USER, $APPLICATION;
@@ -157,7 +157,7 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 			&& $USER->IsAdmin()
 			&& self::getManagementMode()){
 
-			$arMenu = array(); // подпункты меню
+			$arMenu = array(); // РїРѕРґРїСѓРЅРєС‚С‹ РјРµРЅСЋ
 
 			// create top line list
 
@@ -192,18 +192,18 @@ class Templates extends \Alexkova\Bxready2\Allbxready{
 						"DEFAULT" => false,
 						"MENU" => $arExtMenu,
 					);
-					$arMenu[] = array('SEPARATOR' => "Y"); // разделитель
+					$arMenu[] = array('SEPARATOR' => "Y"); // СЂР°Р·РґРµР»РёС‚РµР»СЊ
 				}
 			}
 
 			if (0 < sizeof($arMenu)):
 				$APPLICATION->AddPanelButton(array(
-					"HREF" => '', // можно и ссылку. в таком вариант при нажатии откроется меню
+					"HREF" => '', // РјРѕР¶РЅРѕ Рё СЃСЃС‹Р»РєСѓ. РІ С‚Р°РєРѕРј РІР°СЂРёР°РЅС‚ РїСЂРё РЅР°Р¶Р°С‚РёРё РѕС‚РєСЂРѕРµС‚СЃСЏ РјРµРЅСЋ
 					"TITLE" => GetMessage('BXR_MANAGER'),
 					"ICON" => 'panel-edit-text',
 					"ALT" => GetMessage('BXR_MANAGER_DESCRIPTION'),
 					"TEXT" => GetMessage('BXR_MANAGER_DESCRIPTION'),
-					"MAIN_SORT" => 2000, // после всех кнопок
+					"MAIN_SORT" => 2000, // РїРѕСЃР»Рµ РІСЃРµС… РєРЅРѕРїРѕРє
 					"SORT" => 100,
 					"MENU" => $arMenu,
 				));

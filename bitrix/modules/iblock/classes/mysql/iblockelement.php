@@ -4,7 +4,7 @@ class CIBlockElement extends CAllIBlockElement
 	///////////////////////////////////////////////////////////////////
 	// Function returns lock status of element (red, yellow, green)
 	///////////////////////////////////////////////////////////////////
-	function WF_GetLockStatus($ID, &$locked_by, &$date_lock)
+	public static function WF_GetLockStatus($ID, &$locked_by, &$date_lock)
 	{
 		global $DB, $USER;
 		$err_mess = "FILE: ".__FILE__."<br> LINE:";
@@ -235,7 +235,7 @@ class CIBlockElement extends CAllIBlockElement
 	 * @param array $arSelectFields
 	 * @return integer|CIBlockResult
 	 */
-	function GetList($arOrder=array("SORT"=>"ASC"), $arFilter=array(), $arGroupBy=false, $arNavStartParams=false, $arSelectFields=array())
+	public static function GetList($arOrder=array("SORT"=>"ASC"), $arFilter=array(), $arGroupBy=false, $arNavStartParams=false, $arSelectFields=array())
 	{
 		/*
 		Filter combinations:
@@ -1625,7 +1625,7 @@ class CIBlockElement extends CAllIBlockElement
 		return $Result;
 	}
 
-	function SetPropertyValues($ELEMENT_ID, $IBLOCK_ID, $PROPERTY_VALUES, $PROPERTY_CODE = false)
+	public static function SetPropertyValues($ELEMENT_ID, $IBLOCK_ID, $PROPERTY_VALUES, $PROPERTY_CODE = false)
 	{
 		global $DB;
 		global $BX_IBLOCK_PROP_CACHE;
@@ -2533,12 +2533,12 @@ class CIBlockElement extends CAllIBlockElement
 			ExecuteModuleEventEx($arEvent, array($ELEMENT_ID, $IBLOCK_ID, $PROPERTY_VALUES, $PROPERTY_CODE));
 	}
 
-	function GetRandFunction()
+	public static function GetRandFunction()
 	{
 		return " RAND(".rand(0, 1000000).") ";
 	}
 
-	function GetShowedFunction()
+	public static function GetShowedFunction()
 	{
 		return " IfNULL(BE.SHOW_COUNTER/((UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(BE.SHOW_COUNTER_START)+0.1)/60/60),0) ";
 	}

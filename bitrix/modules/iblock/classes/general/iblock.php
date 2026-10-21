@@ -43,7 +43,7 @@ class CAllIBlock
 		return null;
 	}
 
-	function AddPanelButtons($mode, $componentName, $arButtons)
+	public static function AddPanelButtons($mode, $componentName, $arButtons)
 	{
 		/** @global CMain $APPLICATION */
 		global $APPLICATION;
@@ -1335,7 +1335,7 @@ class CAllIBlock
 		return true;
 	}
 
-	function SetPermission($IBLOCK_ID, $arGROUP_ID)
+	public static function SetPermission($IBLOCK_ID, $arGROUP_ID)
 	{
 		/** @global CDatabase $DB */
 		global $DB;
@@ -2122,7 +2122,7 @@ REQ
 		return $arRes;
 	}
 
-	function GetPermission($IBLOCK_ID, $FOR_USER_ID = false)
+	public static function GetPermission($IBLOCK_ID, $FOR_USER_ID = false)
 	{
 		/** @global CDatabase $DB */
 		global $DB;
@@ -2262,7 +2262,7 @@ REQ
 		return CIBlock::FilterCreateEx($field_name, $values, $type, $bFullJoin, $cOperationType, $bSkipEmpty);
 	}
 
-	function ForLIKE($str)
+	public static function ForLIKE($str)
 	{
 		/** @global CDatabase $DB */
 		global $DB;
@@ -2270,7 +2270,7 @@ REQ
 		return str_replace("%", "\\%", str_replace("_", "\\_", $DB->ForSQL($str)));
 	}
 
-	function FilterCreateEx($fname, $vals, $type, &$bFullJoin, $cOperationType=false, $bSkipEmpty = true)
+	public static function FilterCreateEx($fname, $vals, $type, &$bFullJoin, $cOperationType=false, $bSkipEmpty = true)
 	{
 		/** @global CDatabase $DB */
 		global $DB;
@@ -2547,7 +2547,7 @@ REQ
 		return CIBlock::ReplaceDetailUrl($url, $arr, $server_name, $arrType);
 	}
 
-	function _GetProductUrl($OF_ELEMENT_ID, $OF_IBLOCK_ID, $server_name = false, $arrType = false)
+	public static function _GetProductUrl($OF_ELEMENT_ID, $OF_IBLOCK_ID, $server_name = false, $arrType = false)
 	{
 		static $arIBlockCache = array();
 		static $arElementCache = array();
@@ -3348,7 +3348,7 @@ REQ
 		}
 	}
 
-	function _Order($by, $order, $default_order, $nullable = true)
+	public static function _Order($by, $order, $default_order, $nullable = true)
 	{
 		static $arOrder = array(
 			"nulls,asc"  => array(true,  "asc" ),
@@ -3583,7 +3583,7 @@ REQ
 		return $result;
 	}
 
-	function _transaction_lock($IBLOCK_ID)
+	public static function _transaction_lock($IBLOCK_ID)
 	{
 		/** @global CDatabase $DB */
 		global $DB;
@@ -3602,17 +3602,17 @@ REQ
 		return array_sum($arDate) == 0;
 	}
 
-	function _Upper($str)
+	public static function _Upper($str)
 	{
 		return $str;
 	}
 
-	function _Add($ID)
+	public static function _Add($ID)
 	{
 		return false;
 	}
 
-	function _NotEmpty($column)
+	public static function _NotEmpty($column)
 	{
 		return "";
 	}

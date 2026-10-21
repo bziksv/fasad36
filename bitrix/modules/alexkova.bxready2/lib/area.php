@@ -48,7 +48,7 @@ class Area extends \Alexkova\Bxready2\Allbxready{
 		if (file_exists($areaFile)) include($areaFile);
 	}
 
-	public function getArea($areaName, $default, $siteTemplateId = false){
+	public static function getArea($areaName, $default, $siteTemplateId = false){
 
 		$areaFile = '';
                 $sTemplateId = ($siteTemplateId) ? $siteTemplateId : SITE_TEMPLATE_ID;
@@ -66,11 +66,11 @@ class Area extends \Alexkova\Bxready2\Allbxready{
 		}
 
 		return $areaFile;
-		/*  абослютный путь или false если не удалось найти файл или определить что показать в области */
+		/*  Р°Р±РѕСЃР»СЋС‚РЅС‹Р№ РїСѓС‚СЊ РёР»Рё false РµСЃР»Рё РЅРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё С„Р°Р№Р» РёР»Рё РѕРїСЂРµРґРµР»РёС‚СЊ С‡С‚Рѕ РїРѕРєР°Р·Р°С‚СЊ РІ РѕР±Р»Р°СЃС‚Рё */
 
 	}
 
-	public function getAreaFileByCode($areaName, $areaVersion, $siteTemplatePath = false){
+	public static function getAreaFileByCode($areaName, $areaVersion, $siteTemplatePath = false){
             $sTemplatePath = ($siteTemplatePath) ? $siteTemplatePath : SITE_TEMPLATE_PATH;
             return $_SERVER["DOCUMENT_ROOT"].$sTemplatePath."/bxready2/area/".$areaName."/".$areaVersion.".php";
 	}

@@ -144,7 +144,7 @@ if ($arParams['BXR_ADV_BOTTOM_CONTENT_DETAIL'] != "none"){
 
 }
 
-/// закешировать
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 if ($elementID > 0){
 	$obCache = new CPHPCache();
 	$arCacheArray = $arParams;
@@ -185,11 +185,11 @@ if ($elementID > 0){
 		$related = $arCurRelated['RELATED'];
 		$sections = $arCurRelated['SECTIONS'];
 
-		if (count($sections['order']['sidebar'])>0):
+		if (count($sections['order']['sidebar'] ?? [])>0):
 			foreach ($sections['order']['sidebar'] as $cell=>$val):
 				$iblockID = $sections['iblocks'][$cell]['BXR_RELATED_IBLOCK_ID'];
 
-				if ($iblockID>0 && count($related[$iblockID])>0){
+				if ($iblockID>0 && count($related[$iblockID] ?? [])>0){
 					$this->SetViewTarget('sidebar', $val);
 					$currentParams = $sections['iblocks'][$cell];
 					global $arrRelatedFilter;
@@ -201,11 +201,11 @@ if ($elementID > 0){
 			endforeach;
 		endif;
 
-		if (count($sections['order']['bottom'])>0):
+		if (count($sections['order']['bottom'] ?? [])>0):
 			foreach ($sections['order']['bottom'] as $cell=>$val):
 				$iblockID = $sections['iblocks'][$cell]['BXR_RELATED_IBLOCK_ID'];
 
-				if ($iblockID>0 && count($related[$iblockID])>0){
+				if ($iblockID>0 && count($related[$iblockID] ?? [])>0){
 					$currentParams = $sections['iblocks'][$cell];
 					global $arrRelatedFilter;
 					$arrRelatedFilter = array ('ID' => $related[$iblockID]);

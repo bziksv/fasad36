@@ -2,7 +2,7 @@
 <?
 $arTabs = $arResult['TABS'];
 
-if (count($arTabs['TABS'])>0){
+if (count($arTabs['TABS'] ?? [])>0){
 
 	if ($arParams['BXR_DETAIL_TABS']['BXR_DETAIL_TAB_TYPE'] == 'tabs'){
 		include ('tabs/tabs.php');

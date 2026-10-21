@@ -1,7 +1,7 @@
 <?if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();?>
 
 <?
-if (count($arResult["FILES"])>0){
+if (count($arResult["FILES"] ?? [])>0){
 	$elementDraw = \Alexkova\Bxready2\Draw::getInstance($this);
 	$elementDraw->setCurrentTemplate($this);
 }

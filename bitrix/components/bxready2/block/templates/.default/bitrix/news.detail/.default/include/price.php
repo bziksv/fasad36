@@ -2,9 +2,9 @@
 <?
 global $DB;
 $currency = $arResult["PROPERTIES"]["BXR_UNIT_PRICE"]["VALUE"];
-$price = round($arResult["PROPERTIES"]["BXR_PRICE"]["VALUE"]);
+$price = round((float)$arResult["PROPERTIES"]["BXR_PRICE"]["VALUE"]);
 $display_price = number_format($price, 0, ".", " ");
-$discount_price = round($arResult["PROPERTIES"]["BXR_DISCOUNT_PRICE"]["VALUE"]);
+$discount_price = round((float)$arResult["PROPERTIES"]["BXR_DISCOUNT_PRICE"]["VALUE"]);
 $display_discount_price = number_format($discount_price, 0, ".", " ");
 $discount_period_from = strtotime($arResult["PROPERTIES"]["BXR_DISCOUNT_PERIOD_FROM"]["VALUE"]);
 $discount_period_to = strtotime($arResult["PROPERTIES"]["BXR_DISCOUNT_PERIOD_TO"]["VALUE"]);

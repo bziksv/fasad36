@@ -162,7 +162,7 @@ class CKuznica_rklite_general
 	{
 		global $APPLICATION;
 		$arInfo = unserialize($arFields["~INFO"]);
-		if($arInfo["BANNER_REDIRECT"] == "Y")//если стоит галочка "использовать редирект"
+		if($arInfo["BANNER_REDIRECT"] == "Y")//РµСЃР»Рё СЃС‚РѕРёС‚ РіР°Р»РѕС‡РєР° "РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЂРµРґРёСЂРµРєС‚"
 		{			
 			if(strlen($olink)>0)
 				$overLink = "/bitrix/rklite_go.php?ID={$arFields["ID"]}&backurl=".urlencode($APPLICATION->GetCurPage());
@@ -373,7 +373,7 @@ class CKuznica_rklite_general
 		}
 		return false;
 	}
-	function GetBanners($banTypeCode = "",$limit = 0)
+	public static function GetBanners($banTypeCode = "",$limit = 0)
 	{
 		if(strlen($banTypeCode) == 0)
 			return false;
@@ -399,38 +399,38 @@ class CKuznica_rklite_general
 		{
 			$allCnt++;
 			if($arBanner["SHOW_FIRST"]<$arBanner["SHOW_FROM_X"] && $arBanner["SHOW_FROM_X"]>0)
-			{//сюда попадают ещё не показанные баннеры
+			{//СЃСЋРґР° РїРѕРїР°РґР°СЋС‚ РµС‰С‘ РЅРµ РїРѕРєР°Р·Р°РЅРЅС‹Рµ Р±Р°РЅРЅРµСЂС‹
 				$arNew[$arBanner["ID"]] = $arBanner;
 			}
 			else
-			{//старые баннеры
+			{//СЃС‚Р°СЂС‹Рµ Р±Р°РЅРЅРµСЂС‹
 				$arCPM[$arBanner["ID"]] = $arBanner;
 				$sumLeftCount += $arBanner["LEFT_COUNT"];
 			}
 		}
 
-		//если сумма LEFT_COUNT всех старых баннеров равна нулю, то им всем надо установить LEFT_COUNT=WEIGHT
+		//РµСЃР»Рё СЃСѓРјРјР° LEFT_COUNT РІСЃРµС… СЃС‚Р°СЂС‹С… Р±Р°РЅРЅРµСЂРѕРІ СЂР°РІРЅР° РЅСѓР»СЋ, С‚Рѕ РёРј РІСЃРµРј РЅР°РґРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ LEFT_COUNT=WEIGHT
 		if($sumLeftCount == 0)
-			foreach ($arCPM as $arBanner)//старые баннеры
+			foreach ($arCPM as $arBanner)//СЃС‚Р°СЂС‹Рµ Р±Р°РЅРЅРµСЂС‹
 					CKuznica_rklite::UpdateLeftCount($arBanner["ID"],$arBanner["WEIGHT"]);
 
 
-		//расчет коэффициента - он одинаков для всех новых баннеров
+		//СЂР°СЃС‡РµС‚ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° - РѕРЅ РѕРґРёРЅР°РєРѕРІ РґР»СЏ РІСЃРµС… РЅРѕРІС‹С… Р±Р°РЅРЅРµСЂРѕРІ
 		$k = CKuznica_rklite::GetKoef();
-		foreach ($arNew as &$arBanner)//новые баннеры
+		foreach ($arNew as &$arBanner)//РЅРѕРІС‹Рµ Р±Р°РЅРЅРµСЂС‹
 		{
-				//расчет оставшихся показов
+				//СЂР°СЃС‡РµС‚ РѕСЃС‚Р°РІС€РёС…СЃСЏ РїРѕРєР°Р·РѕРІ
 				$arBanner["LEFT_COUNT"] = $k*$arBanner["WEIGHT"];
-				//запись нового значения LEFT_COUNT в таблицу
+				//Р·Р°РїРёСЃСЊ РЅРѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ LEFT_COUNT РІ С‚Р°Р±Р»РёС†Сѓ
 				CKuznica_rklite::UpdateLeftCount($arBanner["ID"],$arBanner["LEFT_COUNT"]);
-				//добавление нового баннера к старым
+				//РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ Р±Р°РЅРЅРµСЂР° Рє СЃС‚Р°СЂС‹Рј
 				$arCPM[$arBanner["ID"]] = $arBanner;
 		}
 		$arPageDesiredKeywords = CKuznica_rklite::GetPageDesiredKeywords();
 		$arPageRequiredKeywords = CKuznica_rklite::GetPageRequiredKeywords();
 		foreach ($arCPM as $bannerID=>$arBanner)
 		{
-			//таргетинг
+			//С‚Р°СЂРіРµС‚РёРЅРі
 			$bError = false;
 			$arInfo = unserialize($arBanner["~INFO"]);
 			if($arInfo["DESIRED_KEYWORDS"] || $arInfo["REQUIRED_KEYWORDS"])
@@ -533,16 +533,16 @@ class CKuznica_rklite_general
 					 */
 				}
 			}
-			if(!$bError)//если баннер можно показывать, считаем CPM, добавляем в массив для сортировки
+			if(!$bError)//РµСЃР»Рё Р±Р°РЅРЅРµСЂ РјРѕР¶РЅРѕ РїРѕРєР°Р·С‹РІР°С‚СЊ, СЃС‡РёС‚Р°РµРј CPM, РґРѕР±Р°РІР»СЏРµРј РІ РјР°СЃСЃРёРІ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
 			{
-				//если запрос вернул баннеров больше, чем в параметре компонента, то сортировка по CPM, иначе по WEIGHT
+				//РµСЃР»Рё Р·Р°РїСЂРѕСЃ РІРµСЂРЅСѓР» Р±Р°РЅРЅРµСЂРѕРІ Р±РѕР»СЊС€Рµ, С‡РµРј РІ РїР°СЂР°РјРµС‚СЂРµ РєРѕРјРїРѕРЅРµРЅС‚Р°, С‚Рѕ СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ CPM, РёРЅР°С‡Рµ РїРѕ WEIGHT
 				if($limit>0 && $allCnt>$limit)
 					$arSort[$bannerID] = $arBanner["WEIGHT"]/($arBanner["WEIGHT"]-$arBanner["LEFT_COUNT"]+0.01);
 				else
 					$arSort[$bannerID] = $arBanner["WEIGHT"];
 			}
 		}
-		//обратная сортировка с сохранением ключей
+		//РѕР±СЂР°С‚РЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР° СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј РєР»СЋС‡РµР№
 		arsort($arSort);
 
         $sumLeftCount = 0;
@@ -570,7 +570,7 @@ class CKuznica_rklite_general
 		{
 			if(in_array($bannerID, $_SESSION["RKLITE"]["BANNERS"]))
 				continue;
-			//нужное количество баннеров сохраняется в массив, и для каждого уменьшается LEFT_COUNT
+			//РЅСѓР¶РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°РЅРЅРµСЂРѕРІ СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РІ РјР°СЃСЃРёРІ, Рё РґР»СЏ РєР°Р¶РґРѕРіРѕ СѓРјРµРЅСЊС€Р°РµС‚СЃСЏ LEFT_COUNT
 			$arReturn[] = $banner;
 			$_SESSION["RKLITE"]["BANNERS"][] = $bannerID;
 			if($banner["LEFT_COUNT"]>0 && $allCnt>$limit)
@@ -600,7 +600,7 @@ class CKuznica_rklite_general
 			);
 			CKuznica_rklite::UpdateStat($ID,$arChangeUpdated);
 		}
-		else//за сегодняшний день ещё не было статистики по данному баннеру
+		else//Р·Р° СЃРµРіРѕРґРЅСЏС€РЅРёР№ РґРµРЅСЊ РµС‰С‘ РЅРµ Р±С‹Р»Рѕ СЃС‚Р°С‚РёСЃС‚РёРєРё РїРѕ РґР°РЅРЅРѕРјСѓ Р±Р°РЅРЅРµСЂСѓ
 		{
 			CKuznica_rklite::AddStat($ID,$arChange);
 		}
@@ -672,7 +672,7 @@ class CKuznica_rklite_general
 		}
 		return $arReturn;
 	}
-	function GetPageDesiredKeywords()
+	public static function GetPageDesiredKeywords()
 	{
 		return $GLOBALS["RKLITE_PAGE_DESIRED_KEYWORDS"];
 	}
@@ -686,7 +686,7 @@ class CKuznica_rklite_general
 			$GLOBALS["RKLITE_PAGE_DESIRED_KEYWORDS"][] = trim($value);
 		return false;
 	}
-	function GetPageRequiredKeywords()
+	public static function GetPageRequiredKeywords()
 	{
 		return $GLOBALS["RKLITE_PAGE_REQUIRED_KEYWORDS"];
 	}

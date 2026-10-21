@@ -20,7 +20,7 @@ class Less extends \Alexkova\Bxready2\Allbxready{
 			return false;
 	}
 
-	static public function createLess($inFile, $outFile, $lessVars = array(), $autoControl = false){
+	static public static function createLess($inFile, $outFile, $lessVars = array(), $autoControl = false){
 
 		if ($autoControl && !self::lessIsOld($inFile, $outFile)) return false;
 		if (!file_exists($inFile)) return false;

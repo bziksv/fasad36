@@ -30,7 +30,7 @@ if (is_array($arResult['SECTION_TREE']['CHILD'])){
 		}
 		
 
-		if (count($val['CHILD'])>0){
+		if (is_array($val['CHILD'] ?? null) && count($val['CHILD'])>0){
 			foreach ($val['CHILD'] as $cell2=>$child){
 				$arChild = array(
 					'NAME' => $child["NAME"],

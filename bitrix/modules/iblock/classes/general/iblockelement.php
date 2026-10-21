@@ -166,7 +166,7 @@ class CAllIBlockElement
 	///////////////////////////////////////////////////////////////////
 	// Send changing status message
 	///////////////////////////////////////////////////////////////////
-	function WF_SetMove($NEW_ID, $OLD_ID = 0)
+	public static function WF_SetMove($NEW_ID, $OLD_ID = 0)
 	{
 		if(CModule::IncludeModule("workflow"))
 		{
@@ -594,7 +594,7 @@ class CAllIBlockElement
 		return (CIBlockElement::WF_GetLockStatus($ID, $locked_by, $date_lock) == "red");
 	}
 
-	function MkFilter($arFilter, &$arJoinProps, &$arAddWhereFields, $level = 0, $bPropertyLeftJoin = false)
+	public static function MkFilter($arFilter, &$arJoinProps, &$arAddWhereFields, $level = 0, $bPropertyLeftJoin = false)
 	{
 		global $DB, $USER;
 
@@ -1378,7 +1378,7 @@ class CAllIBlockElement
 		return $arSqlSearch;
 	}
 
-	function MkPropertyFilter($res, $cOperationType, $propVAL, $db_prop, &$arJoinProps, &$arSqlSearch)
+	public static function MkPropertyFilter($res, $cOperationType, $propVAL, $db_prop, &$arJoinProps, &$arSqlSearch)
 	{
 		global $DB;
 
@@ -1613,7 +1613,7 @@ class CAllIBlockElement
 		}
 	}
 
-	function MkPropertyOrder($by, $order, $bSort, $db_prop, &$arJoinProps, &$arSqlOrder)
+	public static function MkPropertyOrder($by, $order, $bSort, $db_prop, &$arJoinProps, &$arSqlOrder)
 	{
 		if($bSort && $db_prop["PROPERTY_TYPE"] != "L")
 			return;
@@ -1843,7 +1843,7 @@ class CAllIBlockElement
 
 	}
 
-	function MkPropertyGroup($db_prop, &$arJoinProps, $bSort = false)
+	public static function MkPropertyGroup($db_prop, &$arJoinProps, $bSort = false)
 	{
 		if($db_prop["VERSION"] == 2 && $db_prop["MULTIPLE"]=="N")
 		{
@@ -1902,7 +1902,7 @@ class CAllIBlockElement
 		}
 	}
 
-	function MkPropertySelect($PR_ID, $db_prop, &$arIBlockLongProps, &$arIBlockConvProps, &$arJoinProps, &$arIBlockMultProps, &$arIBlockNumProps, $bWasGroup, $sGroupBy, &$sSelect, $bSort = false)
+	public static function MkPropertySelect($PR_ID, $db_prop, &$arIBlockLongProps, &$arIBlockConvProps, &$arJoinProps, &$arIBlockMultProps, &$arIBlockNumProps, $bWasGroup, $sGroupBy, &$sSelect, $bSort = false)
 	{
 		global $DB, $DBType;
 
@@ -2483,7 +2483,7 @@ class CAllIBlockElement
 		}
 	}
 
-	function MkAlias($max_alias_len, $alias, &$arIBlockLongProps)
+	public static function MkAlias($max_alias_len, $alias, &$arIBlockLongProps)
 	{
 		if($max_alias_len && strlen($alias) > $max_alias_len)
 		{
@@ -2494,7 +2494,7 @@ class CAllIBlockElement
 		return $alias;
 	}
 
-	function PrepareGetList(
+	public static function PrepareGetList(
 		&$arIblockElementFields,
 		&$arJoinProps,
 		&$bOnlyCount,
@@ -3560,7 +3560,7 @@ class CAllIBlockElement
 		return $Result;
 	}
 
-	function DeleteFile($FILE_ID, $ELEMENT_ID, $TYPE = false, $PARENT_ID = -1, $IBLOCK_ID = false, $bCheckOnly = false)
+	public static function DeleteFile($FILE_ID, $ELEMENT_ID, $TYPE = false, $PARENT_ID = -1, $IBLOCK_ID = false, $bCheckOnly = false)
 	{
 		global $DB;
 
@@ -4653,7 +4653,7 @@ class CAllIBlockElement
 	//////////////////////////////////////////////////////////////////////////
 	//
 	//////////////////////////////////////////////////////////////////////////
-	function RecalcSections($ID, $sectionId = null)
+	public static function RecalcSections($ID, $sectionId = null)
 	{
 		global $DB;
 		$ID = intval($ID);
@@ -4755,7 +4755,7 @@ class CAllIBlockElement
 	//////////////////////////////////////////////////////////////////////////
 	//
 	//////////////////////////////////////////////////////////////////////////
-	function SetElementSection($ID, $arSections, $bNew = false, $bRightsIBlock = 0, $sectionId = null)
+	public static function SetElementSection($ID, $arSections, $bNew = false, $bRightsIBlock = 0, $sectionId = null)
 	{
 		global $DB;
 		$ID = intval($ID);
@@ -4917,7 +4917,7 @@ class CAllIBlockElement
 		return "";
 	}
 
-	function UpdateSearch($ID, $bOverWrite=false)
+	public static function UpdateSearch($ID, $bOverWrite=false)
 	{
 		if(!CModule::IncludeModule("search"))
 			return;
@@ -6654,7 +6654,7 @@ class CAllIBlockElement
 			ExecuteModuleEventEx($arEvent, array($ELEMENT_ID, $IBLOCK_ID, $PROPERTY_VALUES, $FLAGS));
 	}
 
-	function _check_rights_sql($min_permission)
+	public static function _check_rights_sql($min_permission)
 	{
 		global $DB, $USER;
 		$min_permission = (strlen($min_permission)==1) ? $min_permission : "R";

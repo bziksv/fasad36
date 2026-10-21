@@ -35,7 +35,7 @@ class CIBlockPropertySequence
 		';
 	}
 
-	function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
+	public static function GetPropertyFieldHtml($arProperty, $value, $strHTMLControlName)
 	{
 		if($value["VALUE"] > 0 && !$strHTMLControlName["COPY"])
 		{
@@ -54,7 +54,7 @@ class CIBlockPropertySequence
 				'<input type="hidden" size="5" name="'.$strHTMLControlName["VALUE"].'" value="'.$current_value.'">';
 	}
 
-	function PrepareSettings($arProperty)
+	public static function PrepareSettings($arProperty)
 	{
 		//This method not for storing sequence value in the database
 		//but it just sets starting value for it
@@ -79,7 +79,7 @@ class CIBlockPropertySequence
 		return $arProperty;
 	}
 
-	function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+	public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
 	{
 		$arPropertyFields = array(
 			"HIDE" => array("SEARCHABLE", "WITH_DESCRIPTION", "ROW_COUNT", "COL_COUNT", "DEFAULT_VALUE")

@@ -35,7 +35,7 @@ $voteContainerId = 'vote_'.$arResult["ID"];
 	$onclick = "JCFlatVote.do_vote(this, '".$voteContainerId."', ".$arResult["AJAX_PARAMS"].")";
 	foreach ($arResult["VOTE_NAMES"] as $i => $name)
 	{
-		if ($DISPLAY_VALUE && round($DISPLAY_VALUE) > $i)
+		if ($DISPLAY_VALUE && round((float)$DISPLAY_VALUE) > $i)
 			$className = "fa fa-star";
 		else
 			$className = "fa fa-star-o";
