@@ -196,7 +196,7 @@ if($USER->CanDoOperation('view_other_settings') || $USER->CanDoOperation('manage
 		$aModuleItems = array();
 		if(method_exists($adminMenu, "IsSectionActive"))
 		{
-			if($adminMenu->IsSectionActive("menu_module_settings") || ($APPLICATION->GetCurPage() == "/bitrix/admin/settings.php" && $_REQUEST["mid_menu"]<>"") || BX_SEARCH_ADMIN === true)
+			if($adminMenu->IsSectionActive("menu_module_settings") || ($APPLICATION->GetCurPage() == "/bitrix/admin/settings.php" && $_REQUEST["mid_menu"]<>"") || (defined("BX_SEARCH_ADMIN") && BX_SEARCH_ADMIN === true))
 			{
 				$adminPage->Init();
 				foreach($adminPage->aModules as $module)
@@ -227,7 +227,7 @@ if($USER->CanDoOperation('view_other_settings') || $USER->CanDoOperation('manage
 						"sort" => $sort,
 					);
 
-					if(BX_SEARCH_ADMIN===true)
+					if(defined("BX_SEARCH_ADMIN") && BX_SEARCH_ADMIN===true)
 					{
 						$lfile = getLocalPath("modules/".$module."/lang/".LANGUAGE_ID."/options.php");
 						if($lfile !== false)
@@ -238,7 +238,7 @@ if($USER->CanDoOperation('view_other_settings') || $USER->CanDoOperation('manage
 
 					$aModuleItems[] = $aModule;
 				}
-				usort($aModuleItems, create_function('$a, $b', 'if($a["sort"] == $b["sort"]) return strcasecmp($a["text"], $b["text"]); return ($a["sort"] < $b["sort"])? -1 : 1;'));
+				usort($aModuleItems, function($a, $b) { if($a["sort"] == $b["sort"]) return strcasecmp($a["text"], $b["text"]); return ($a["sort"] < $b["sort"])? -1 : 1; });
 			}
 		}
 
