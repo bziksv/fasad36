@@ -1,7 +1,7 @@
 <?
 class CIBlockRSS extends CAllIBlockRSS
 {
-	function GetCache($cacheKey)
+	public static function GetCache($cacheKey)
 	{
 		global $DB;
 
@@ -12,7 +12,7 @@ class CIBlockRSS extends CAllIBlockRSS
 		return $db_res->Fetch();
 	}
 
-	function Add($IBLOCK_ID, $NODE, $NODE_VALUE)
+	public static function Add($IBLOCK_ID, $NODE, $NODE_VALUE)
 	{
 		global $DB;
 		$IBLOCK_ID = IntVal($IBLOCK_ID);
@@ -21,7 +21,7 @@ class CIBlockRSS extends CAllIBlockRSS
 			"VALUES(".$IBLOCK_ID.", '".$DB->ForSql($NODE, 50)."', '".$DB->ForSql($NODE_VALUE, 255)."')");
 	}
 
-	function UpdateCache($cacheKey, $CACHE, $HOURS_CACHE, $bCACHED)
+	public static function UpdateCache($cacheKey, $CACHE, $HOURS_CACHE, $bCACHED)
 	{
 		global $DB;
 
@@ -47,7 +47,7 @@ class CIBlockRSS extends CAllIBlockRSS
 		$db_res = $DB->Query("DELETE from b_iblock_cache WHERE CACHE_DATE < NOW()");
 	}
 
-	function GetRSSText($arIBLOCK, $LIMIT_NUM = false, $LIMIT_DAY = false, $yandex = false)
+	public static function GetRSSText($arIBLOCK, $LIMIT_NUM = false, $LIMIT_DAY = false, $yandex = false)
 	{
 		global $DB;
 
@@ -258,7 +258,7 @@ class CIBlockRSS extends CAllIBlockRSS
 	}
 
 	// Agent
-	function PreGenerateRSS($IBLOCK_ID, $yandex = true)
+	public static function PreGenerateRSS($IBLOCK_ID, $yandex = true)
 	{
 		global $DB;
 

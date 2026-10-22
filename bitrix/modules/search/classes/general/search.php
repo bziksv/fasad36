@@ -260,7 +260,7 @@ class CAllSearch extends CDBResult
 		return md5($perm.$sql.$this->strTags);
 	}
 
-	function chr($a)
+	public static function chr($a)
 	{
 		return chr($a[1]);
 	}
@@ -731,7 +731,7 @@ class CAllSearch extends CDBResult
 		return $r;
 	}
 
-	function CheckPath($path)
+	public static function CheckPath($path)
 	{
 		static $SEARCH_MASKS_CACHE = false;
 
@@ -800,7 +800,7 @@ class CAllSearch extends CDBResult
 		return 0;
 	}
 
-	function GetGroupCached()
+	public static function GetGroupCached()
 	{
 		static $SEARCH_CACHED_GROUPS = false;
 
@@ -819,7 +819,7 @@ class CAllSearch extends CDBResult
 		return $SEARCH_CACHED_GROUPS;
 	}
 
-	function QueryMnogoSearch(&$xml)
+	public static function QueryMnogoSearch(&$xml)
 	{
 		$SITE = COption::GetOptionString("search", "mnogosearch_url", "www.mnogosearch.org");
 		$PATH = COption::GetOptionString("search", "mnogosearch_path", "");
@@ -860,7 +860,7 @@ class CAllSearch extends CDBResult
 	//reindex the whole server content
 	//$bFull = true - no not check change_date. all index tables will be truncated
 	//       = false - add new ones. update changed and delete deleted.
-	function ReIndexAll($bFull = false, $max_execution_time = 0, $NS = Array(), $clear_suggest = false)
+	public static function ReIndexAll($bFull = false, $max_execution_time = 0, $NS = Array(), $clear_suggest = false)
 	{
 		global $APPLICATION;
 		$DB = CDatabase::GetModuleConnection('search');
@@ -1031,7 +1031,7 @@ class CAllSearch extends CDBResult
 		return $NS["CNT"];
 	}
 
-	function ReindexModule($MODULE_ID, $bFull=false)
+	public static function ReindexModule($MODULE_ID, $bFull=false)
 	{
 		global $APPLICATION;
 		$DB = CDatabase::GetModuleConnection('search');
@@ -1076,7 +1076,7 @@ class CAllSearch extends CDBResult
 	}
 	//index one item (forum message, news, etc.)
 	//combination of ($MODULE_ID, $ITEM_ID) is used to determine the documents
-	function Index($MODULE_ID, $ITEM_ID, $arFields, $bOverWrite=false, $SEARCH_SESS_ID="")
+	public static function Index($MODULE_ID, $ITEM_ID, $arFields, $bOverWrite=false, $SEARCH_SESS_ID="")
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -1427,7 +1427,7 @@ class CAllSearch extends CDBResult
 		return preg_replace("/(".implode("|", $pregEntities).")/i", "", $str);
 	}
 
-	function ReindexFile($path, $SEARCH_SESS_ID="")
+	public static function ReindexFile($path, $SEARCH_SESS_ID="")
 	{
 		global $APPLICATION;
 		$io = CBXVirtualIo::GetInstance();
@@ -1566,7 +1566,7 @@ class CAllSearch extends CDBResult
 		return $ID;
 	}
 
-	function RecurseIndex($path=Array(), $max_execution_time = 0, &$NS)
+	public static function RecurseIndex($path=Array(), $max_execution_time = 0, &$NS)
 	{
 		global $APPLICATION;
 
@@ -1655,7 +1655,7 @@ class CAllSearch extends CDBResult
 		return true;
 	}
 
-	function RemovePHP($str)
+	public static function RemovePHP($str)
 	{
 		$res = "";
 		$a = preg_split('/(<'.'\\?|\\?'.'>|\\/\\'.'*|\\'.'*'.'\\/|\\/\\/|\'|"|\\n)/', $str, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -1783,12 +1783,12 @@ class CAllSearch extends CDBResult
 		return $str;
 	}
 
-	function OnChangeFile($path, $site)
+	public static function OnChangeFile($path, $site)
 	{
 		CSearch::ReindexFile(Array($site, $path));
 	}
 
-	function OnGroupDelete($ID)
+	public static function OnGroupDelete($ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$DB->Query("
@@ -1797,7 +1797,7 @@ class CAllSearch extends CDBResult
 		", false, "File: ".__FILE__."<br>Line: ".__LINE__);
 	}
 
-	function __PrepareFilter($arFilter, &$bIncSites, $strSearchContentAlias="sc.")
+	public static function __PrepareFilter($arFilter, &$bIncSites, $strSearchContentAlias="sc.")
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$arSql = array();
@@ -2063,7 +2063,7 @@ class CAllSearch extends CDBResult
 		return " ORDER BY ".implode(", ",$arOrder);
 	}
 
-	function Add($arFields)
+	public static function Add($arFields)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -2088,7 +2088,7 @@ class CAllSearch extends CDBResult
 			return $DB->Add("b_search_content", $arFields, array("BODY", "TAGS", "SEARCHABLE_CONTENT"), true);
 	}
 
-	function OnChangeFilePermissions($path, $permission = array(), $old_permission = array(), $arGroups = false)
+	public static function OnChangeFilePermissions($path, $permission = array(), $old_permission = array(), $arGroups = false)
 	{
 
 		global $APPLICATION;
@@ -2167,7 +2167,7 @@ class CAllSearch extends CDBResult
 		}//if(file_exists($DOC_ROOT.$path))
 	}
 
-	function SetContentItemGroups($index_id, $arGroups)
+	public static function SetContentItemGroups($index_id, $arGroups)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$index_id = intval($index_id);
@@ -2207,7 +2207,7 @@ class CAllSearch extends CDBResult
 		}
 	}
 
-	function CheckPermissions($FIELD = "sc.ID")
+	public static function CheckPermissions($FIELD = "sc.ID")
 	{
 		global $USER;
 
@@ -2247,7 +2247,7 @@ class CAllSearch extends CDBResult
 		return "((".implode(") OR (", $arResult)."))";
 	}
 
-	function SetContentItemParams($index_id, $arParams)
+	public static function SetContentItemParams($index_id, $arParams)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$index_id = intval($index_id);
@@ -2328,7 +2328,7 @@ class CAllSearch extends CDBResult
 			$DB->Query($sql, false, "File: ".__FILE__."<br>Line: ".__LINE__);
 	}
 
-	function GetContentItemParams($index_id, $param_name = false)
+	public static function GetContentItemParams($index_id, $param_name = false)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$index_id = intval($index_id);
@@ -2375,7 +2375,7 @@ class CAllSearch extends CDBResult
 		return $this->stddev($a);
 	}
 
-	function DeleteOld($SESS_ID, $MODULE_ID="", $SITE_ID="")
+	public static function DeleteOld($SESS_ID, $MODULE_ID="", $SITE_ID="")
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -2424,7 +2424,7 @@ class CAllSearch extends CDBResult
 		CSearchTags::CleanCache();
 	}
 
-	function DeleteForReindex($MODULE_ID)
+	public static function DeleteForReindex($MODULE_ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -2451,7 +2451,7 @@ class CAllSearch extends CDBResult
 		CSearchTags::CleanCache();
 	}
 
-	function DeleteIndex($MODULE_ID, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false)
+	public static function DeleteIndex($MODULE_ID, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$bIncSites = false;
@@ -2507,7 +2507,7 @@ class CAllSearch extends CDBResult
 		CSearchTags::CleanCache();
 	}
 
-	function Update($ID, $arFields)
+	public static function Update($ID, $arFields)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$bUpdate = false;
@@ -2574,7 +2574,7 @@ class CAllSearch extends CDBResult
 			CSearchFullText::getInstance()->update($ID, $arFields);
 	}
 
-	function UpdateSite($ID, $arSITE_ID)
+	public static function UpdateSite($ID, $arSITE_ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$ID = intval($ID);
@@ -2627,7 +2627,7 @@ class CAllSearch extends CDBResult
 		}
 	}
 
-	function ChangeIndex($MODULE_ID, $arFields, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false)
+	public static function ChangeIndex($MODULE_ID, $arFields, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$bIncSites = false;
@@ -2652,7 +2652,7 @@ class CAllSearch extends CDBResult
 		}
 	}
 
-	function ChangeSite($MODULE_ID, $arSite, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false)
+	public static function ChangeSite($MODULE_ID, $arSite, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$bIncSites = false;
@@ -2680,7 +2680,7 @@ class CAllSearch extends CDBResult
 		}
 	}
 
-	function ChangePermission($MODULE_ID, $arGroups, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false, $PARAMS=false)
+	public static function ChangePermission($MODULE_ID, $arGroups, $ITEM_ID=false, $PARAM1=false, $PARAM2=false, $SITE_ID=false, $PARAMS=false)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$bIncSites = false;

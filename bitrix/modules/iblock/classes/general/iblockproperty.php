@@ -341,7 +341,7 @@ class CAllIBlockProperty
 	///////////////////////////////////////////////////////////////////
 	// This one called before any Update or Add
 	///////////////////////////////////////////////////////////////////
-	public static function CheckFields(&$arFields, $ID=false, $bFormValidate=false)
+	public function CheckFields(&$arFields, $ID=false, $bFormValidate=false)
 	{
 		/** @var CMain $APPLICATION */
 		global $APPLICATION;
@@ -987,7 +987,7 @@ class CAllIBlockProperty
 		return GetMessage("IBLOCK_PROPERTY_NOT_FOUND",array("#ID#"=>$ID));
 	}
 
-	function _DateTime_GetUserTypeDescription()
+	public static function _DateTime_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "S",
@@ -1008,7 +1008,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _Date_GetUserTypeDescription()
+	public static function _Date_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "S",
@@ -1029,7 +1029,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _XmlID_GetUserTypeDescription()
+	public static function _XmlID_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE"		=>"S",
@@ -1042,7 +1042,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _FileMan_GetUserTypeDescription()
+	public static function _FileMan_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE"		=>"S",
@@ -1056,7 +1056,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _HTML_GetUserTypeDescription()
+	public static function _HTML_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "S",
@@ -1074,7 +1074,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _ElementList_GetUserTypeDescription()
+	public static function _ElementList_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "E",
@@ -1091,7 +1091,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _Sequence_GetUserTypeDescription()
+	public static function _Sequence_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "N",
@@ -1107,7 +1107,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _ElementAutoComplete_GetUserTypeDescription()
+	public static function _ElementAutoComplete_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "E",
@@ -1124,7 +1124,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _SKU_GetUserTypeDescription()
+	public static function _SKU_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "E",
@@ -1141,7 +1141,7 @@ class CAllIBlockProperty
 		);
 	}
 
-	function _SectionAutoComplete_GetUserTypeDescription()
+	public static function _SectionAutoComplete_GetUserTypeDescription()
 	{
 		return array(
 			"PROPERTY_TYPE" => "G",
@@ -1163,7 +1163,7 @@ class CAllIBlockProperty
 		return false;
 	}
 
-	function DropColumnSQL($strTable, $arColumns)
+	public static function DropColumnSQL($strTable, $arColumns)
 	{
 		return array();
 	}

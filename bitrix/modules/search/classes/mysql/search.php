@@ -668,7 +668,7 @@ class CSearch extends CAllSearch
 		return $strSql."LIMIT ".$limit;
 	}
 
-	function ReindexLock()
+	public static function ReindexLock()
 	{
 		//do not lock for mysql database
 	}
@@ -711,7 +711,7 @@ class CSearch extends CAllSearch
 		", false, "File: ".__FILE__."<br>Line: ".__LINE__);
 	}
 
-	function IndexTitle($arLID, $ID, $sTitle)
+	public static function IndexTitle($arLID, $ID, $sTitle)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		static $CACHE_SITE_LANGS = array();
@@ -932,7 +932,7 @@ class CSearch extends CAllSearch
 		}
 	}
 
-	function TagsIndex($arLID, $ID, $sContent)
+	public static function TagsIndex($arLID, $ID, $sContent)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$ID = intval($ID);
@@ -974,7 +974,7 @@ class CSearch extends CAllSearch
 		}
 	}
 
-	function UpdateSite($ID, $arSITE_ID)
+	public static function UpdateSite($ID, $arSITE_ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$ID = intval($ID);

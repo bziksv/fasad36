@@ -1,7 +1,7 @@
 <?
 class CSearchTags
 {
-	function GetList($arSelect = array(), $arFilter = array(), $arOrder = array(), $limit = 100)
+	public static function GetList($arSelect = array(), $arFilter = array(), $arOrder = array(), $limit = 100)
 	{
 		global $USER;
 		$DB = CDatabase::GetModuleConnection('search');
@@ -209,7 +209,7 @@ class CSearchTags
 		}
 	}
 
-	function CleanCache($arTags = "", $content_id = false)
+	public static function CleanCache($arTags = "", $content_id = false)
 	{
 		if(CACHED_b_search_tags !== false)
 		{
