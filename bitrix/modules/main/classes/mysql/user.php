@@ -143,7 +143,7 @@ class CUser extends CAllUser
 		return $res;
 	}
 
-	public static function GetList(&$by, &$order, $arFilter=Array(), $arParams=Array())
+	public static function GetList($by = "id", $order = "asc", $arFilter=Array(), $arParams=Array())
 	{
 		/** @global CUserTypeManager $USER_FIELD_MANAGER */
 		global $DB, $USER_FIELD_MANAGER;

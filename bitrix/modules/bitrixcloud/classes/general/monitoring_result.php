@@ -314,7 +314,7 @@ class CBitrixCloudMonitoringResult implements CBitrixCloudMonitoring_Access
 		CBitrixCloudOption::getOption("monitoring_expire_time")->setStringValue($time);
 		return $time;
 	}
-	public function loadFromOptions()
+	public static function loadFromOptions()
 	{
 		$domains = new CBitrixCloudMonitoringResult;
 		foreach(CBitrixCloudOption::getOption("monitoring_result")->getArrayValue() as $i => $domainName)

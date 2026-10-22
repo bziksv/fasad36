@@ -565,7 +565,7 @@ class CAllEventMessage
 		}
 	}
 
-	public static function GetList(&$by, &$order, $arFilter=Array())
+	public static function GetList($by = "id", $order = "desc", $arFilter=Array())
 	{
 		$arSearch = Array();
 		$arSqlSearch = Array();
