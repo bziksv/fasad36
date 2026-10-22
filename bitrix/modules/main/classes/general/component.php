@@ -132,9 +132,9 @@ class CBitrixComponent
 		}
 		else
 		{
-			$this->setSiteId(SITE_ID);
-			$this->setLanguageId(LANGUAGE_ID);
-			$this->setSiteTemplateId(SITE_TEMPLATE_ID);
+			$this->setSiteId(defined("SITE_ID") ? SITE_ID : "s1");
+			$this->setLanguageId(defined("LANGUAGE_ID") ? LANGUAGE_ID : "ru");
+			$this->setSiteTemplateId(defined("SITE_TEMPLATE_ID") ? SITE_TEMPLATE_ID : "");
 		}
 
 		$this->request = \Bitrix\Main\Context::getCurrent()->getRequest();
