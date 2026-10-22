@@ -43,12 +43,18 @@ foreach($adminPage->aModules as $module)
 	if($ifile !== false && $ofile !== false)
 	{
 		$info = CModule::CreateModuleObject($module);
+		if(!is_object($info))
+			continue;
 		$arModules[$module]["PAGE"] = $_SERVER["DOCUMENT_ROOT"].$ofile;
 		$arModules[$module]["NAME"] = $info->MODULE_NAME;
 		$arModules[$module]["SORT"] = $info->MODULE_SORT;
 	}
 }
-uasort($arModules, create_function('$a, $b', 'if($a["SORT"] == $b["SORT"]) return strcasecmp($a["NAME"], $b["NAME"]); return ($a["SORT"] < $b["SORT"])? -1 : 1;'));
+uasort($arModules, function($a, $b) {
+	if($a["SORT"] == $b["SORT"])
+		return strcasecmp((string)$a["NAME"], (string)$b["NAME"]);
+	return ($a["SORT"] < $b["SORT"]) ? -1 : 1;
+});
 
 $mid = $_REQUEST["mid"];
 if($mid == "" || !isset($arModules[$mid]) || !file_exists($arModules[$mid]["PAGE"]))
