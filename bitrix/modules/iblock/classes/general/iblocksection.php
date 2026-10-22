@@ -2112,7 +2112,7 @@ class CAllIBlockSection
 	 * @param bool|array $arSelectedFields
 	 * @return CDBResult
 	 */
-	function GetMixedList($arOrder=Array("SORT"=>"ASC"), $arFilter=Array(), $bIncCnt = false, $arSelectedFields = false)
+	public static function GetMixedList($arOrder=Array("SORT"=>"ASC"), $arFilter=Array(), $bIncCnt = false, $arSelectedFields = false)
 	{
 		global $DB;
 
