@@ -3288,10 +3288,11 @@ class CAdminList
 	{
 		if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['save'])  && check_bitrix_sessid())
 		{
-			$arrays = array(&$_POST, &$_REQUEST, &$GLOBALS);
+			// &$GLOBALS is fatal in PHP 8.1+; clean POST/REQUEST then mirror FIELDS into $GLOBALS by key
+			$arrays = array(&$_POST, &$_REQUEST);
 			foreach($arrays as $i => $array)
 			{
-				if(is_array($array["FIELDS"]))
+				if(isset($array["FIELDS"]) && is_array($array["FIELDS"]))
 				{
 					foreach($array["FIELDS"] as $id=>$fields)
 					{
@@ -3308,6 +3309,14 @@ class CAdminList
 						}
 					}
 				}
+			}
+			if(isset($_POST["FIELDS"]) && is_array($_POST["FIELDS"]))
+			{
+				$GLOBALS["FIELDS"] = $_POST["FIELDS"];
+			}
+			elseif(isset($_REQUEST["FIELDS"]) && is_array($_REQUEST["FIELDS"]))
+			{
+				$GLOBALS["FIELDS"] = $_REQUEST["FIELDS"];
 			}
 			return true;
 		}
