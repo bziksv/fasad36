@@ -4228,7 +4228,7 @@ class CAllSite
 		return false;
 	}
 
-	public static function GetList(&$by, &$order, $arFilter=array())
+	public static function GetList($by = "sort", $order = "asc", $arFilter=array())
 	{
 		global $DB, $CACHE_MANAGER;
 
@@ -4730,7 +4730,7 @@ class CAllLanguage
 {
 	var $LAST_ERROR;
 
-	public static function GetList(&$by, &$order, $arFilter=array())
+	public static function GetList($by = "sort", $order = "asc", $arFilter=array())
 	{
 		global $DB;
 		$arSqlSearch = array();

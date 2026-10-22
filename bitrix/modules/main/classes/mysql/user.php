@@ -715,7 +715,7 @@ class CGroup extends CAllGroup
 		return $res;
 	}
 
-	public static function GetList(&$by, &$order, $arFilter=Array(), $SHOW_USERS_AMOUNT="N")
+	public static function GetList($by = "c_sort", $order = "asc", $arFilter=Array(), $SHOW_USERS_AMOUNT="N")
 	{
 		global $DB;
 
