@@ -1518,7 +1518,9 @@ window.MLSearchResult = [
 		}
 
 		$result = array();
-		if (count($arConfigTypes) > 0)
+		if (!is_array($arMLTypes))
+			$arMLTypes = array();
+		if (is_array($arConfigTypes) && count($arConfigTypes) > 0)
 		{
 			foreach($arMLTypes as $type)
 			{
