@@ -4530,7 +4530,7 @@ class CAllIBlockElement
 	 * @param mixed $PROPERTY_VALUE
 	 * @return bool
 	 */
-	function SetPropertyValueCode($ELEMENT_ID, $PROPERTY_CODE, $PROPERTY_VALUE)
+	public static function SetPropertyValueCode($ELEMENT_ID, $PROPERTY_CODE, $PROPERTY_VALUE)
 	{
 		$IBLOCK_ID = CIBlockElement::GetIBlockByID($ELEMENT_ID);
 		if (!$IBLOCK_ID)
@@ -5948,7 +5948,7 @@ class CAllIBlockElement
 			return 1;
 	}
 
-	function DeletePropertySQL($property, $iblock_element_id)
+	public static function DeletePropertySQL($property, $iblock_element_id)
 	{
 		global $DB;
 
@@ -6752,7 +6752,7 @@ class CAllIBlockElement
 		return $strResult;
 	}
 
-	protected function __GetDescriptionUpdateSql($iblock_id, $property_id, $description = false)
+	protected static function __GetDescriptionUpdateSql($iblock_id, $property_id, $description = false)
 	{
 		global $DB;
 		$tableFields = $DB->GetTableFields("b_iblock_element_prop_s".$iblock_id);
