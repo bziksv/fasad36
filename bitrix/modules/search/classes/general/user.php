@@ -8,7 +8,7 @@ class CSearchUser
 		$this->_user_id = intval($user_id);
 	}
 
-	function OnAfterUserUpdate(&$arFields)
+	public static function OnAfterUserUpdate(&$arFields)
 	{
 		if(array_key_exists("GROUP_ID", $arFields))
 		{
@@ -17,13 +17,13 @@ class CSearchUser
 		}
 	}
 
-	function DeleteByUserID($USER_ID)
+	public static function DeleteByUserID($USER_ID)
 	{
 		$ob = new CSearchUser($USER_ID);
 		$ob->DeleteGroups();
 	}
 
-	function CheckCurrentUserGroups()
+	public static function CheckCurrentUserGroups()
 	{
 		global $USER;
 		$user_id = is_object($USER)? intval($USER->GetID()): 0;

@@ -91,7 +91,7 @@ class CSearchStatistic
 		}
 	}
 
-	function GetList($arOrder = false, $arFilter = false, $arSelect = false, $bGroup = false)
+	public static function GetList($arOrder = false, $arFilter = false, $arSelect = false, $bGroup = false)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -264,7 +264,7 @@ class CSearchStatistic
 		return $DB->Query($strSql, false, "File: ".__FILE__."<br>Line: ".__LINE__);
 	}
 
-	function CleanUpAgent()
+	public static function CleanUpAgent()
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$cleanup_days = COption::GetOptionInt("search", "stat_phrase_save_days");
@@ -277,7 +277,7 @@ class CSearchStatistic
 		return "CSearchStatistic::CleanUpAgent();";
 	}
 
-	function IsActive()
+	public static function IsActive()
 	{
 		$bActive = false;
 		foreach (GetModuleEvents("main", "OnEpilog", true) as $arEvent)
@@ -294,7 +294,7 @@ class CSearchStatistic
 		return $bActive;
 	}
 
-	function SetActive($bActive = false)
+	public static function SetActive($bActive = false)
 	{
 		if($bActive)
 		{
@@ -308,7 +308,7 @@ class CSearchStatistic
 		}
 	}
 
-	function GetCurrentURL()
+	public static function GetCurrentURL()
 	{
 		$res = (CMain::IsHTTPS() ? "https" : "http")."://";
 
@@ -328,7 +328,7 @@ class CSearchStatistic
 		return $res;
 	}
 
-	function OnEpilog()
+	public static function OnEpilog()
 	{
 		if(isset($_REQUEST["sphrase_id"]))
 		{

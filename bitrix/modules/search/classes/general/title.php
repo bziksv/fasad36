@@ -129,7 +129,7 @@ class CAllSearchTitle extends CDBResult
 		return $r;
 	}
 
-	function MakeFilterUrl($prefix, $arFilter)
+	public static function MakeFilterUrl($prefix, $arFilter)
 	{
 		if(!is_array($arFilter))
 		{

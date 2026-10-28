@@ -296,7 +296,7 @@ Class search extends CModule
 		}
 	}
 
-	function OnGetTableList()
+	public static function OnGetTableList()
 	{
 		return array(
 			"MODULE" => new search,
@@ -319,7 +319,7 @@ Class search extends CModule
 		);
 	}
 
-	function OnGetTableSchema()
+	public static function OnGetTableSchema()
 	{
 		return array(
 			"search" => array(

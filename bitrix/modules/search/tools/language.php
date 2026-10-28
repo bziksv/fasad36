@@ -165,7 +165,7 @@ class CSearchLanguage
 		return $result;
 	}
 
-	function StrToArray($str)
+	public static function StrToArray($str)
 	{
 		if(defined("BX_UTF"))
 		{

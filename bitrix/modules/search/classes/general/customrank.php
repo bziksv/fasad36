@@ -4,7 +4,7 @@ class CSearchCustomRank
 {
 	var $LAST_ERROR="";
 
-	function GetList($aSort=array(), $aFilter=array())
+	public static function GetList($aSort=array(), $aFilter=array())
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -80,7 +80,7 @@ class CSearchCustomRank
 		return $DB->Query($strSql, false, "File: ".__FILE__."<br>Line: ".__LINE__);
 	}
 
-	function GetByID($ID)
+	public static function GetByID($ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$ID = intval($ID);
@@ -94,7 +94,7 @@ class CSearchCustomRank
 		return $DB->Query($strSql, false, "File: ".__FILE__."<br>Line: ".__LINE__);
 	}
 
-	function Delete($ID)
+	public static function Delete($ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$ID = intval($ID);
@@ -227,7 +227,7 @@ class CSearchCustomRank
 		else
 			return false;
 	}
-	function __GetParam($lang, $site_id, $module_id=false, $param1=false, $param2=false, $item_id=false)
+	public static function __GetParam($lang, $site_id, $module_id=false, $param1=false, $param2=false, $item_id=false)
 	{
 		$name="";
 		if($module_id=="iblock" && CModule::IncludeModule("iblock"))
@@ -305,11 +305,11 @@ class CSearchCustomRank
 	///////////////////////////////////////////////////////////////////
 	// Returns drop down list with modules
 	///////////////////////////////////////////////////////////////////
-	function ModulesList()
+	public static function ModulesList()
 	{
 		return array_merge(array("main" => GetMessage("customrank_files")), CSearchParameters::GetModulesList());
 	}
-	function ModulesSelectBox($sFieldName, $sValue, $sDefaultValue="", $sFuncName="", $field="class=\"typeselect\"")
+	public static function ModulesSelectBox($sFieldName, $sValue, $sDefaultValue="", $sFuncName="", $field="class=\"typeselect\"")
 	{
 		$s = '<select name="'.$sFieldName.'" id="'.$sFieldName.'" '.$field;
 		if(strlen($sFuncName)>0) $s .= ' OnChange="'.$sFuncName.'"';

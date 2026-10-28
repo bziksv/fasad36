@@ -151,7 +151,7 @@ class CSearchSuggest
 		}
 	}
 
-	function CleanUpAgent()
+	public static function CleanUpAgent()
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$cleanup_days = COption::GetOptionInt("search", "suggest_save_days");

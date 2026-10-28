@@ -673,7 +673,7 @@ class CSearch extends CAllSearch
 		//do not lock for mysql database
 	}
 
-	function OnLangDelete($lang)
+	public static function OnLangDelete($lang)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		$DB->Query("
@@ -683,17 +683,17 @@ class CSearch extends CAllSearch
 		CSearchTags::CleanCache();
 	}
 
-	function FormatDateString($strField)
+	public static function FormatDateString($strField)
 	{
 		return "DATE_FORMAT(".$strField.", '%d.%m.%Y %H:%i:%s')";
 	}
 
-	function FormatLimit($strSql, $limit)
+	public static function FormatLimit($strSql, $limit)
 	{
 		return str_replace("/*TOP*/", "", $strSql)."LIMIT ".intval($limit);
 	}
 
-	function CleanFreqCache($ID)
+	public static function CleanFreqCache($ID)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 
@@ -771,7 +771,7 @@ class CSearch extends CAllSearch
 		}
 	}
 
-	function RegisterStem($stem)
+	public static function RegisterStem($stem)
 	{
 		global $DB;
 		static $cache = array();
@@ -829,7 +829,7 @@ class CSearch extends CAllSearch
 		return $cache[$stem];
 	}
 
-	function StemIndex($arLID, $ID, $sContent)
+	public static function StemIndex($arLID, $ID, $sContent)
 	{
 		$DB = CDatabase::GetModuleConnection('search');
 		static $CACHE_SITE_LANGS = array();
