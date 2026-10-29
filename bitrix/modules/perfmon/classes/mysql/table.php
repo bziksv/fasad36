@@ -2,7 +2,7 @@
 
 class CPerfomanceTableList extends CDBResult
 {
-	function GetList($bFull = true)
+	public static function GetList($bFull = true)
 	{
 		global $DB;
 		if ($bFull)
@@ -222,7 +222,7 @@ class CPerfomanceTable extends CAllPerfomanceTable
 		return "`".str_replace("`", "``", $column)."`";
 	}
 
-	function escapeTable($tableName)
+	public static function escapeTable($tableName)
 	{
 		return "`".str_replace("`", "``", $tableName)."`";
 	}

@@ -178,7 +178,7 @@ class CAllPerfomanceTable
 		return $column;
 	}
 
-	function escapeTable($tableName)
+	public static function escapeTable($tableName)
 	{
 		return $tableName;
 	}
