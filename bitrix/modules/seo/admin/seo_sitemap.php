@@ -76,6 +76,17 @@ while($arRes = $dbSites->fetch(Converter::getHtmlConverter()))
 $map = SitemapTable::getMap();
 unset($map['SETTINGS']);
 
+// CAdminSorting / user options may pass lowercase field names (e.g. by=id)
+if (!is_string($by) || !isset($map[$by]))
+{
+	$byCandidate = is_string($by) ? strtoupper($by) : 'ID';
+	$by = isset($map[$byCandidate]) ? $byCandidate : 'ID';
+}
+if (!is_string($order) || !in_array(strtolower($order), array('asc', 'desc'), true))
+{
+	$order = 'desc';
+}
+
 $sitemapList = SitemapTable::getList(array(
 	'order' => array($by => $order),
 	"select" => array_keys($map),

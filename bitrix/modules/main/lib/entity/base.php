@@ -328,7 +328,8 @@ class Base
 	{
 		if ($this->hasField($name))
 		{
-			return $this->fields[$name];
+			// Bitrix ORM field names are case-insensitive (PHP 8+ / admin sort by=id)
+			return $this->fields[strtoupper($name)];
 		}
 
 		throw new Main\ArgumentException(sprintf(
@@ -338,7 +339,7 @@ class Base
 
 	public function hasField($name)
 	{
-		return isset($this->fields[$name]);
+		return isset($this->fields[strtoupper($name)]);
 	}
 
 	/**
