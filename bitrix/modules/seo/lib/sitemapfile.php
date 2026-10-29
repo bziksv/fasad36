@@ -264,7 +264,8 @@ class SitemapFile
 	 */
 	public function removeEntry($url)
 	{
-		$url = $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e = null).$url;
+		$e = array();
+		$url = $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e).$url;
 		$pattern = sprintf(self::ENTRY_TPL_SEARCH, $url);
 
 		while($this->isExists())
@@ -315,8 +316,9 @@ class SitemapFile
 	{
 		if($f->isExists() && !$f->isSystem())
 		{
+			$e = array();
 			$this->addEntry(array(
-				'XML_LOC' => $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e = null).$this->getFileUrl($f),
+				'XML_LOC' => $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e).$this->getFileUrl($f),
 				'XML_LASTMOD' => date('c', $f->getModificationTime()),
 			));
 		}
@@ -332,8 +334,9 @@ class SitemapFile
 	 */
 	public function addIBlockEntry($url, $modifiedDate)
 	{
+		$e = array();
 		$this->addEntry(array(
-			'XML_LOC' => $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e = null).$url,
+			'XML_LOC' => $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e).$url,
 			'XML_LASTMOD' => date('c', $modifiedDate - \CTimeZone::getOffset()),
 		));
 	}
@@ -350,8 +353,9 @@ class SitemapFile
 	{
 		if($this->isExists())
 		{
+			$e = array();
 			$this->appendEntry(array(
-				'XML_LOC' => $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e = null).$url,
+				'XML_LOC' => $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e).$url,
 				'XML_LASTMOD' => date('c', $modifiedDate - \CTimeZone::getOffset()),
 			));
 		}
@@ -390,7 +394,8 @@ class SitemapFile
 	 */
 	public function getUrl()
 	{
-		return $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e = null).$this->getFileUrl($this);
+		$e = array();
+		return $this->settings['PROTOCOL'].'://'.\CBXPunycode::toASCII($this->settings['DOMAIN'], $e).$this->getFileUrl($this);
 	}
 
 	/**
