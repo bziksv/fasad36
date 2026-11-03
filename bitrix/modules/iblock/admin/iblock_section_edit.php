@@ -480,7 +480,7 @@ if($ID>0)
 else
 	$APPLICATION->SetTitle(GetMessage("IBSEC_E_NEW_TITLE", array("#IBLOCK_NAME#"=>$arIBlock["NAME"], "#SECTION_TITLE#"=>$arIBlock["SECTION_NAME"])));
 
-if (!bAutocomplete)
+if (!$bAutocomplete)
 {
 	if(!defined("CATALOG_PRODUCT"))
 	{
